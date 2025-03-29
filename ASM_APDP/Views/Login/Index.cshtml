@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+<h2>Login</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <p style="color:red">@ViewBag.Message</p>
+}
+
+<form method="post" action="@Url.Action("Login", "Auth")">
+    <label>Username:</label>
+    <input type="text" name="Username" required /><br>
+
+    <label>Password:</label>
+    <input type="password" name="Password" required /><br>
+
+    <button type="submit">Login</button>
+</form>
+
+<p>Don't have an account? <a href="@Url.Action("Register", "Student")">Register here</a></p>

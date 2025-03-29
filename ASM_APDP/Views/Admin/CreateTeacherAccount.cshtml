@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Create Teacher Account";
+}
+<h2>Create Teacher Account</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <p style="color:red">@ViewBag.Message</p>
+}
+
+<form method="post" action="@Url.Action("SaveTeacherAccount", "Admin")">
+    <label>Username:</label>
+    <input type="text" name="username" required /><br>
+
+    <label>Password:</label>
+    <input type="password" name="password" required /><br>
+
+    <button type="submit">Create</button>
+</form>

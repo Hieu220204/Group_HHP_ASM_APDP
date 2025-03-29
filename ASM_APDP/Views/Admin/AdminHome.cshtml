@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Admin Home";
+}
+
+<h2>Welcome Admin</h2>
+
+<a href="@Url.Action("CreateTeacherAccount", "Admin")">
+    <button>Create Teacher Account</button>
+</a>
+
+<a href="@Url.Action("ManageSchedule", "Admin")">
+    <button>Manage Schedule</button>
+</a>
+
+<a href="@Url.Action("Logout", "Login")">
+    <button>Logout</button>
+</a>
