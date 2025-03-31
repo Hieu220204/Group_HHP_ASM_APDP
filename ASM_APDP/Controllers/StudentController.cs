@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Text;
 using BCrypt.Net;
@@ -8,6 +9,12 @@ namespace ASM_APDP.Controllers
     public class StudentController : Controller
     {
         private readonly string filePath = "wwwroot/students.csv";
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public StudentController(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
 
         [HttpPost]
         public IActionResult SaveStudent(string username, string password)
@@ -35,7 +42,8 @@ namespace ASM_APDP.Controllers
 
         public IActionResult StudentHome()
         {
-            if (HttpContext.Session.GetString("username") == null)
+            var session = _httpContextAccessor.HttpContext?.Session;
+            if (session == null || string.IsNullOrEmpty(session.GetString("username")))
                 return RedirectToAction("Login", "Auth");
 
             return View();

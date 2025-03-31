@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using System.IO;
 using BCrypt.Net;
 
@@ -8,6 +9,12 @@ namespace ASM_APDP.Controllers
     {
         private readonly string studentFilePath = "wwwroot/students.csv";
         private readonly string adminFilePath = "wwwroot/admins.csv";
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public LoginController(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
 
         [HttpPost]
         public IActionResult Authenticate(string username, string password)
@@ -20,28 +27,36 @@ namespace ASM_APDP.Controllers
 
             try
             {
-                // Kiểm tra tài khoản admin
+                // Kiểm tra admin
                 var admins = System.IO.File.ReadAllLines(adminFilePath);
                 foreach (var line in admins)
                 {
                     var data = line.Split(",");
                     if (data.Length >= 2 && data[0] == username && BCrypt.Net.BCrypt.Verify(password, data[1]))
                     {
-                        HttpContext.Session.SetString("username", username);
-                        HttpContext.Session.SetString("role", "admin");
+                        var session = _httpContextAccessor.HttpContext?.Session;
+                        if (session != null)
+                        {
+                            session.SetString("username", username);
+                            session.SetString("role", "admin");
+                        }
                         return RedirectToAction("AdminHome", "Admin");
                     }
                 }
 
-                // Kiểm tra tài khoản student
+                // Kiểm tra student
                 var students = System.IO.File.ReadAllLines(studentFilePath);
                 foreach (var line in students)
                 {
                     var data = line.Split(",");
                     if (data.Length >= 2 && data[0] == username && BCrypt.Net.BCrypt.Verify(password, data[1]))
                     {
-                        HttpContext.Session.SetString("username", username);
-                        HttpContext.Session.SetString("role", "student");
+                        var session = _httpContextAccessor.HttpContext?.Session;
+                        if (session != null)
+                        {
+                            session.SetString("username", username);
+                            session.SetString("role", "student");
+                        }
                         return RedirectToAction("StudentHome", "Student");
                     }
                 }
@@ -62,7 +77,7 @@ namespace ASM_APDP.Controllers
 
         public IActionResult Logout()
         {
-            HttpContext.Session.Clear();
+            _httpContextAccessor.HttpContext?.Session.Clear();
             return RedirectToAction("Index", "Login");
         }
     }
