@@ -1,9 +1,2 @@
-﻿@{
-    ViewData["Title"] = "Teacher Home";
-}
-
-<h2>Welcome, Teacher</h2>
-
-<a href="@Url.Action("Logout", "Login")">
-    <button>Logout</button>
-</a>
+﻿<h1>Welcome Teacher</h1>
+<a asp-action="Login" asp-controller="Auth">Logout</a>

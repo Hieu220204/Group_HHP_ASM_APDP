@@ -1,19 +1,9 @@
-﻿@{
-    ViewData["Title"] = "Register";
-}
-<h2>Student Registration</h2>
+﻿@model ASM_APDP.Models.RegisterModel
 
-@if (!string.IsNullOrEmpty(ViewBag.Message))
-{
-    <p style="color:red">@ViewBag.Message</p>
-}
-
-<form method="post" action="@Url.Action("SaveStudent", "Student")">
-    <label>Username:</label>
-    <input type="text" name="username" required /><br>
-
-    <label>Password:</label>
-    <input type="password" name="password" required /><br>
-
+<h2>Register</h2>
+<form asp-action="Register" asp-controller="Register" method="post">
+    <input type="text" name="FullName" placeholder="Full Name" required />
+    <input type="email" name="Email" placeholder="Email" required />
+    <input type="password" name="Password" placeholder="Password" required />
     <button type="submit">Register</button>
 </form>

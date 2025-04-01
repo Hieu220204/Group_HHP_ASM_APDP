@@ -1,8 +1,7 @@
 ﻿namespace ASM_APDP.Models
 {
-    public class StudentModel
+    public class TeacherModel
     {
-        public string FullName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
     }

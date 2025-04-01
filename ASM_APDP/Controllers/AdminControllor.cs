@@ -1,24 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
+using ASM_APDP.Models;
+using System.IO;
 
 namespace ASM_APDP.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
-
-        public AdminController(IHttpContextAccessor httpContextAccessor)
-        {
-            _httpContextAccessor = httpContextAccessor;
-        }
+        private readonly string teacherFile = "wwwroot/data/Teacher.csv";
 
         public IActionResult AdminHome()
         {
-            var session = _httpContextAccessor.HttpContext?.Session;
-            if (session == null || session.GetString("role") != "Admin")
-                return RedirectToAction("Login", "Auth");
-
             return View();
+        }
+
+        public IActionResult CreateTeacher()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateTeacher(TeacherModel model)
+        {
+            if (!System.IO.File.Exists(teacherFile))
+            {
+                System.IO.File.WriteAllText(teacherFile, "");
+            }
+
+            System.IO.File.AppendAllText(teacherFile, $"{model.Email},{model.Password},Teacher\n");
+            return RedirectToAction("AdminHome");
         }
     }
 }

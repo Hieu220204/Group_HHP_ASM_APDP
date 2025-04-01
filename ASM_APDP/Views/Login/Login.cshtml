@@ -1,0 +1,15 @@
+﻿@model ASM_APDP.Models.LoginModel
+
+<h2>Login</h2>
+<form asp-action="Login" asp-controller="Login" method="post">
+    <input type="text" name="Email" placeholder="Email" required />
+    <input type="password" name="Password" placeholder="Password" required />
+    <button type="submit">Login</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <p style="color:red">@ViewBag.Message</p>
+}
+
+<a asp-action="Register" asp-controller="Register">Register</a>

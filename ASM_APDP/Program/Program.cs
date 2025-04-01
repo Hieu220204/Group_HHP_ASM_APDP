@@ -1,35 +1,26 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-// Tắt Browser Link nếu không cần
-builder.Services.Configure<Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions>(options =>
-{
-    options.ViewLocationFormats.Clear();
-});
+var builder = WebApplication.CreateBuilder(args);
 
-// Cấu hình session và các middleware quan trọng
-builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSession(options =>
-{
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
-});
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// **TẮT BROWSER LINK**
-app.UseWhen(context => !context.Request.Path.StartsWithSegments("/_framework"), appBuilder =>
+if (!app.Environment.IsDevelopment())
 {
-    appBuilder.UseSession();
-});
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
 
-// Cấu hình Middleware cơ bản
+app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Login}/{action=Login}/{id?}");
 
 app.Run();

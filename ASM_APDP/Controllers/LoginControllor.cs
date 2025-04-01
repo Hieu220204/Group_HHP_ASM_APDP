@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace ASM_APDP.Controllers
 {
-    public class AuthController : Controller
+    public class LoginController : Controller
     {
         private readonly string studentFile = "wwwroot/data/Student.csv";
         private readonly string teacherFile = "wwwroot/data/Teacher.csv";
@@ -53,23 +53,6 @@ namespace ASM_APDP.Controllers
 
             ViewBag.Message = "Invalid login credentials";
             return View();
-        }
-
-        public IActionResult Register()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Register(RegisterModel model)
-        {
-            if (!System.IO.File.Exists(studentFile))
-            {
-                System.IO.File.WriteAllText(studentFile, "");
-            }
-
-            System.IO.File.AppendAllText(studentFile, $"{model.FullName},{model.Email},{model.Password}\n");
-            return RedirectToAction("Login");
         }
     }
 }
