@@ -1,5 +1,5 @@
-﻿email,password,role
-teacher1@gmail.com,123,Teacher
-teacher2@gmail.com,123,Teacher
-teacher3@gmail.com,123,Teacher
-teacher4@gmail.com,123,Teacher
+﻿FullName,Email,Password
+John Teacher,john.teacher@example.com,teacher123
+Jane Teacher,jane.teacher@example.com,teacher456
+teacher1,teacher1@gmail.com,123
+teacher2,teacher2@gmail.com,123

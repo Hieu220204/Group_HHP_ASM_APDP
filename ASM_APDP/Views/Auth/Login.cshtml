@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<h2>Login</h2>
+
+@if (ViewBag.Error != null)
+{
+    <div style="color: red;">
+        @ViewBag.Error
+    </div>
+}
+
+<form method="post" action="@Url.Action("Login", "Auth")">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required /><br /><br />
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required /><br /><br />
+
+    <button type="submit">Login</button>
+</form>
+
+<!-- Nút Register cho phép sinh viên đăng ký -->
+<a href="@Url.Action("Register", "Auth")">
+    <button>Register</button>
+</a>

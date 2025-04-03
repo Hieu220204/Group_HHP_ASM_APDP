@@ -1,2 +1,10 @@
-﻿<h1>Welcome Student</h1>
-<a asp-action="Login" asp-controller="Auth">Logout</a>
+﻿@{
+    Layout = "_Layout";
+}
+
+<h2>Welcome, @User.Identity.Name!</h2>
+
+<!-- Nút Logout -->
+<form method="post" action="@Url.Action("Logout", "Auth")">
+    <button type="submit">Logout</button>
+</form>

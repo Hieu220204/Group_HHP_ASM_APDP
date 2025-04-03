@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Register</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+@if (ViewData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success mt-3">
+        @ViewData["SuccessMessage"]
+    </div>
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger mt-3">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+<!-- Nút Login Here (Chuyển hướng về trang Login) -->
+<div class="mt-3">
+    <a href="@Url.Action("Login", "Auth")">Login Here</a>
+</div>

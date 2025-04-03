@@ -1,1 +1,5 @@
-﻿student1,student1@gmail.com,123
+﻿FullName,Email,Password
+John Doe,john.doe@example.com,student123
+Jane Smith,jane.smith@example.com,student456
+student1,student1@gmail.com,123
+student2,student2@gmail.com,123

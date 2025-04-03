@@ -1,3 +1,15 @@
-﻿<h1>Admin Home</h1>
-<a asp-action="CreateTeacher" asp-controller="Admin">Create Teacher</a>
-<a asp-action="Login" asp-controller="Auth">Logout</a>
+﻿@{
+    Layout = "_Layout";
+}
+
+<h2>Welcome to Admin Home</h2>
+
+<!-- Nút Logout -->
+<form method="post" action="@Url.Action("Logout", "Admin")">
+    <button type="submit">Logout</button>
+</form>
+
+<!-- Nút CreateAccountTeacher -->
+<a href="@Url.Action("CreateAccountTeacher", "Admin")">
+    <button>Create Teacher Account</button>
+</a>
