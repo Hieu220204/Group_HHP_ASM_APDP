@@ -1,0 +1,64 @@
+﻿@model List<ASM_APDP.Models.Schedule>
+@{
+    Layout = "_Layout";
+}
+
+<h2>Manage Schedules</h2>
+
+<!-- Back to Home Button -->
+<a href="@Url.Action("AdminHome", "Admin")">
+    <button style="margin-bottom: 15px;">Back to Home</button>
+</a>
+
+<!-- Add Schedule Form -->
+<form method="post" asp-action="AddSchedule" asp-controller="Admin">
+    <input type="text" name="subjectName" placeholder="Subject Name" required />
+    <input type="text" name="teacherName" placeholder="Teacher Name" required />
+    <input type="date" name="date" required />
+    <input type="time" name="time" required />
+    <button type="submit">Add Schedule</button>
+</form>
+
+<hr />
+
+<!-- Schedule List -->
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Subject</th>
+        <th>Teacher</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var schedule in Model)
+    {
+        <tr>
+            <td>@schedule.Id</td>
+            <td>@schedule.SubjectName</td>
+            <td>@schedule.TeacherName</td>
+            <td>@schedule.Date</td>
+            <td>@schedule.Time</td>
+            <td>
+                <!-- Edit Form -->
+                <form method="post" asp-action="EditSchedule" asp-controller="Admin" style="display:inline;">
+                    <input type="hidden" name="id" value="@schedule.Id" />
+                    <input type="text" name="subjectName" value="@schedule.SubjectName" required />
+                    <input type="text" name="teacherName" value="@schedule.TeacherName" required />
+                    <input type="date" name="date" value="@schedule.Date" required />
+                    <input type="time" name="time" value="@schedule.Time" required />
+                    <button type="submit">Edit</button>
+                </form>
+
+                <!-- Delete Form -->
+                <form method="post" asp-action="DeleteSchedule" asp-controller="Admin" style="display:inline;">
+                    <input type="hidden" name="id" value="@schedule.Id" />
+                    <button type="submit" onclick="return confirm('Are you sure to delete this schedule?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+

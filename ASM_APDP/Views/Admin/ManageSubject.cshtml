@@ -1,0 +1,72 @@
+﻿@model List<ASM_APDP.Models.Subject>
+@{
+    Layout = "_Layout";
+    var courses = ViewBag.Courses as List<ASM_APDP.Models.Course>;
+}
+
+<h2>Manage Subjects</h2>
+
+<!-- Back to Home Button -->
+<a href="@Url.Action("AdminHome", "Admin")">
+    <button style="margin-bottom: 15px;">Back to Home</button>
+</a>
+
+<!-- Add Subject -->
+<form method="post" asp-action="AddSubject" asp-controller="Admin">
+    <input type="text" name="name" placeholder="Subject name" required />
+    <select name="courseId" required>
+        <option value="">Select Course</option>
+        @foreach (var course in courses)
+        {
+            <option value="@course.Id">@course.Name</option>
+        }
+    </select>
+    <button type="submit">Add Subject</button>
+</form>
+
+<hr />
+
+<!-- Subject List -->
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Course</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var subject in Model)
+    {
+        var courseName = courses.FirstOrDefault(c => c.Id == subject.CourseId)?.Name ?? "Unknown";
+
+        <tr>
+            <td>@subject.Id</td>
+            <td>@subject.Name</td>
+            <td>@courseName</td>
+            <td>
+                <!-- Edit -->
+                <form method="post" asp-action="EditSubject" asp-controller="Admin" style="display:inline;">
+                    <input type="hidden" name="id" value="@subject.Id" />
+                    <input type="text" name="newName" placeholder="New name" required />
+                    <select name="newCourseId" required>
+                        @foreach (var course in courses)
+                        {
+                            <option value="@course.Id" selected="@(course.Id == subject.CourseId ? "selected" : null)">
+                                @course.Name
+                            </option>
+                        }
+                    </select>
+                    <button type="submit">Edit</button>
+                </form>
+
+                <!-- Delete -->
+                <form method="post" asp-action="DeleteSubject" asp-controller="Admin" style="display:inline;">
+                    <input type="hidden" name="id" value="@subject.Id" />
+                    <button type="submit" onclick="return confirm('Are you sure to delete this subject?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+

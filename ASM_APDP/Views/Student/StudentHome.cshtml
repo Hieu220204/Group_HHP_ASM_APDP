@@ -4,6 +4,12 @@
 
 <h2>Welcome, @User.Identity.Name!</h2>
 
+
+<!-- Nút Xem Lịch Học -->
+<a href="@Url.Action("ViewSchedule", "Student")">
+    <button>View Schedule</button>
+</a>
+
 <!-- Nút Logout -->
 <form method="post" action="@Url.Action("Logout", "Auth")">
     <button type="submit">Logout</button>

@@ -1,0 +1,52 @@
+﻿@model List<ASM_APDP.Models.Course>
+
+@{
+    Layout = "_Layout";
+}
+
+<h2>Manage Courses</h2>
+
+<!-- Back to Home Button -->
+<a href="@Url.Action("AdminHome", "Admin")">
+    <button style="margin-top: 10px;">Back to Home</button>
+</a>
+
+
+<!-- Add Course -->
+<form method="post" asp-action="AddCourse" asp-controller="Admin">
+    <input type="text" name="name" placeholder="Course name" required />
+    <button type="submit">Add Course</button>
+</form>
+
+<hr />
+
+<!-- Course List -->
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var course in Model)
+    {
+        <tr>
+            <td>@course.Id</td>
+            <td>@course.Name</td>
+            <td>
+                <!-- Edit -->
+                <form method="post" asp-action="EditCourse" asp-controller="Admin" style="display:inline;">
+                    <input type="hidden" name="id" value="@course.Id" />
+                    <input type="text" name="newName" placeholder="New name" required />
+                    <button type="submit">Edit</button>
+                </form>
+
+                <!-- Delete -->
+                <form method="post" asp-action="DeleteCourse" asp-controller="Admin" style="display:inline;">
+                    <input type="hidden" name="id" value="@course.Id" />
+                    <button type="submit" onclick="return confirm('Are you sure to delete this course?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

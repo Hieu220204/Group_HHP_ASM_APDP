@@ -1,0 +1,31 @@
+﻿@model List<ASM_APDP.Models.Schedule>
+
+@{
+    Layout = "_Layout";
+}
+
+<h2>View Schedule</h2>
+
+<!-- Back to Home Button -->
+<a href="@Url.Action("StudentHome", "Student")">
+    <button style="margin-bottom: 15px;">Back to Home</button>
+</a>
+
+<table border="1">
+    <tr>
+        <th>Subject</th>
+        <th>Date</th>
+        <th>Time</th>
+    </tr>
+    @foreach (var schedule in Model)
+    {
+        <tr>
+            <td>@schedule.SubjectName</td>
+            <td>@schedule.Date</td>
+            <td>@schedule.Time</td>
+        </tr>
+    }
+</table>
+
+<br />
+
