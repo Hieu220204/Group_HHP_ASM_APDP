@@ -1,5 +1,6 @@
-﻿FullName,Email,Password
-John Doe,john.doe@example.com,student123
-Jane Smith,jane.smith@example.com,student456
-student1,student1@gmail.com,123
-student2,student2@gmail.com,123
+﻿FullName,Email,Password,PhoneNumber,DOB,Address
+John Doe,john.doe@example.com,student123,1234567890,2000-01-01,123 Main St
+Jane Smith,jane.smith@example.com,student456,0987654321,1999-02-02,456 Elm St
+student1,student1@gmail.com,123,234567890,2001-03-03,789 Oak St
+student2,student2@gmail.com,123,234567890,2002-04-04,101 Pine St
+Nguyen NhuPhuc,phuc1@gmail.com,123,,,

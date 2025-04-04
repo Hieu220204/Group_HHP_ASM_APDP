@@ -1,35 +1,28 @@
-﻿@model ASM_APDP.Models.Teacher
+﻿@model ASM_APDP.Models.Student
 
 @{
-    ViewData["Title"] = "Update Profile";
+    Layout = "_Layout";
 }
 
 <h2>Update Profile</h2>
 
-<form method="post" asp-action="UpdateProfile">
+<form method="post">
     <div>
         <label for="FullName">Full Name</label>
         <input type="text" id="FullName" name="FullName" value="@Model.FullName" required />
     </div>
     <div>
-        <label for="Password">Password</label>
-        <input type="password" id="Password" name="Password" value="@Model.Password" required />
-    </div>
-    <div>
         <label for="PhoneNumber">Phone Number</label>
-        <input type="text" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" required />
+        <input type="text" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" />
     </div>
     <div>
-        <label for="Subject">Subject</label>
-        <input type="text" id="Subject" name="Subject" value="@Model.Subject" required />
-    </div>
-    <div>
-        <label for="DateOfBirth">Date of Birth</label>
-        <input type="date" id="DateOfBirth" name="DateOfBirth" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" required />
+        <label for="DOB">Date of Birth</label>
+        <input type="date" id="DOB" name="DOB" value="@Model.DOB" />
     </div>
     <div>
         <label for="Address">Address</label>
-        <input type="text" id="Address" name="Address" value="@Model.Address" required />
+        <input type="text" id="Address" name="Address" value="@Model.Address" />
     </div>
+
     <button type="submit">Update</button>
 </form>

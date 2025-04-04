@@ -60,4 +60,29 @@ public class TeacherController : Controller
     }
 
 
+    public IActionResult UpdateProfile()
+    {
+        // (Tạm thời giả lập lấy thông tin giáo viên đang đăng nhập từ session hoặc cookie)
+        string email = "teacher1@gmail.com"; // TODO: Thay bằng email từ session/cookie
+        string password = "123";             // Tương tự như trên
+
+        var teacher = Teacher.GetTeacherByUsername(email, password);
+        if (teacher != null)
+        {
+            return View(teacher);
+        }
+
+        return RedirectToAction("Login");
+    }
+
+    [HttpPost]
+    public IActionResult UpdateProfile(Teacher updatedTeacher)
+    {
+        Teacher.UpdateTeacherProfile(updatedTeacher);
+        ViewBag.Message = "Profile updated successfully!";
+        return View(updatedTeacher);
+    }
+
+
+
 }

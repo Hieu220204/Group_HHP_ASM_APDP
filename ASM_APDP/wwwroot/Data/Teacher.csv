@@ -1,5 +1,6 @@
-﻿FullName,Email,Password
-John Teacher,john.teacher@example.com,teacher123
-Jane Teacher,jane.teacher@example.com,teacher456
-teacher1,teacher1@gmail.com,123
-teacher2,teacher2@gmail.com,123
+FullName,Email,Password,PhoneNumber,Subject,DOB
+John Teacher,john.teacher@example.com,teacher123,0123456789,Math,1980-01-01
+Jane Teacher,jane.teacher@example.com,teacher456,0987654321,Physics,1985-05-12
+teacher1,teacher1@gmail.com,123,1234567890,English,1992-03-18
+teacher2,teacher2@gmail.com,123,0911223344,Chemistry,1992-03-15
+
