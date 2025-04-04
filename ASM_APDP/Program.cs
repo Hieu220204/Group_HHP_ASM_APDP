@@ -3,7 +3,7 @@
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Cấu hình Session
+// Configure Session
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -13,7 +13,7 @@ builder.Services.AddSession(options =>
 
 var app = builder.Build();
 
-// Sử dụng middleware session
+// Use session middleware
 app.UseSession();
 app.UseRouting();
 

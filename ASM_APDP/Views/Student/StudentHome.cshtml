@@ -4,7 +4,8 @@
 
 <h2>Welcome, @User.Identity.Name!</h2>
 
-<!-- Nút Logout -->
+<a href="@Url.Action("ChangePasswordStudent", "Student")" class="btn btn-warning">Thay đổi mật khẩu</a>
+
 <form method="post" action="@Url.Action("Logout", "Auth")">
     <button type="submit">Logout</button>
 </form>

@@ -17,17 +17,25 @@ public class RegisterController : Controller
         {
             if (Student.IsEmailExist(email))
             {
-                ViewBag.ErrorMessage = "Email này đã được đăng ký. Vui lòng chọn email khác.";
+                ViewBag.ErrorMessage = "This email has already been registered. Please choose a different email.";
                 return View();
             }
 
             Student.SaveStudent(fullName, email, password);
-            TempData["SuccessMessage"] = "Tạo tài khoản thành công! Bạn có thể đăng nhập ngay.";
-            return View("Register"); // Giữ nguyên trang thay vì về Login
+
+            // 🛠 Check if the data has been saved
+            if (!Student.IsEmailExist(email))
+            {
+                ViewBag.ErrorMessage = "An error occurred, the account could not be saved!";
+                return View();
+            }
+
+            TempData["SuccessMessage"] = "Registration successful! You can log in now.";
+            return View("Register"); // Do not automatically redirect to Login
         }
         catch (Exception ex)
         {
-            ViewBag.ErrorMessage = "Đã có lỗi khi đăng ký tài khoản: " + ex.Message;
+            ViewBag.ErrorMessage = "An error occurred while registering the account: " + ex.Message;
             return View();
         }
     }

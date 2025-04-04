@@ -22,11 +22,13 @@ public class LoginController : Controller
             return RedirectToAction("StudentHome", "Student");
         }
 
-        var teacher = Teacher.GetTeacherByUsername(email, password);
+        var teacher = Teacher.GetTeacherByEmail(email, password);
         if (teacher != null)
         {
-            return RedirectToAction("TeacherHome", "Teacher");
+            HttpContext.Session.SetString("UserEmail", email); // Save teacher email in session
+            return RedirectToAction("TeacherHome", "Teacher"); // Redirect to TeacherHome page
         }
+
 
         ViewBag.Error = "Invalid login information. Please check your email and password again.";
         return View();

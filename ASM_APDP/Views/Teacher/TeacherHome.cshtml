@@ -1,2 +1,12 @@
-﻿<h2>Welcome, Teacher</h2>
-<a href="#">Logout</a>
+﻿@{
+    ViewData["Title"] = "Teacher Home";
+}
+
+<h2>Welcome to Teacher Home</h2>
+<p>This is the teacher's dashboard where you can access various features.</p>
+
+<!-- Button to change password -->
+<a href="@Url.Action("ChangePasswordTeacher", "Teacher")">Change Password</a>
+
+<!-- Logout button -->
+<a href="@Url.Action("Logout", "Teacher")">Logout</a>
