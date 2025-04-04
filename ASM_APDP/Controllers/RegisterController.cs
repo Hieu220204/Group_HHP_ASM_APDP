@@ -11,27 +11,31 @@ public class RegisterController : Controller
     }
 
     [HttpPost]
-    public IActionResult Register(string fullName, string email, string password)
+    public IActionResult RegisterStudent(string fullName, string email, string password, string dob, string numberPhone, string hometown, string major)
     {
         try
         {
+            // Kiểm tra email đã tồn tại chưa
             if (Student.IsEmailExist(email))
             {
                 ViewBag.ErrorMessage = "This email has already been registered. Please choose a different email.";
                 return View();
             }
 
-            Student.SaveStudent(fullName, email, password);
+            // Lưu thông tin sinh viên vào CSV file
+            Student.SaveStudent(fullName, email, password, dob, numberPhone, hometown, major);
 
-            // 🛠 Check if the data has been saved
-            if (!Student.IsEmailExist(email))
+            // Kiểm tra xem dữ liệu có được lưu thành công không
+            if (Student.IsEmailExist(email))
+            {
+                TempData["SuccessMessage"] = "Registration successful! You can log in now.";
+                return RedirectToAction("Login", "Auth");
+            }
+            else
             {
                 ViewBag.ErrorMessage = "An error occurred, the account could not be saved!";
                 return View();
             }
-
-            TempData["SuccessMessage"] = "Registration successful! You can log in now.";
-            return View("Register"); // Do not automatically redirect to Login
         }
         catch (Exception ex)
         {
@@ -39,4 +43,5 @@ public class RegisterController : Controller
             return View();
         }
     }
+
 }

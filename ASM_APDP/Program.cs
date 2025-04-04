@@ -17,8 +17,9 @@ var app = builder.Build();
 app.UseSession();
 app.UseRouting();
 
+// Đảm bảo routing đúng để truy cập đến Student/Profile
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Auth}/{action=Login}/{id?}");
+    pattern: "{controller=Auth}/{action=Login}/{id?}"); // Đảm bảo action mặc định là Login
 
 app.Run();

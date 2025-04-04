@@ -4,8 +4,11 @@
 
 <h2>Welcome, @User.Identity.Name!</h2>
 
-<a href="@Url.Action("ChangePasswordStudent", "Student")" class="btn btn-warning">Thay đổi mật khẩu</a>
+<a href="@Url.Action("Profile", "Student")" class="btn btn-primary">View Profile</a>
+
+
+<a href="@Url.Action("ChangePasswordStudent", "Student")" class="btn btn-warning">Change Password</a>
 
 <form method="post" action="@Url.Action("Logout", "Auth")">
-    <button type="submit">Logout</button>
+    <button type="submit" class="btn btn-danger">Logout</button>
 </form>

@@ -1,6 +1,4 @@
-FullName,Email,Password
-John Doe,john.doe@example.com,student123
-Jane Smith,jane.smith@example.com,student456
-student1,student1@gmail.com,123
-student2,student2@gmail.com,123
-student3,student3@gmail.com,1234
+FullName,Email,Password,DateOfBirth,PhoneNumber,Hometown,Major
+
+BUI VIET HOANG,bvh27102003@gmail.com,123,2003-10-27,0359854330,Lao Cai,IT
+student1,student1@gmail.com,123,1111-11-11,123456789,Lao Cai,IT

@@ -55,22 +55,26 @@ public class AuthController : Controller
     }
 
     // Handle registration POST request
+
+
     [HttpPost]
-    public IActionResult Register(string fullName, string email, string password)
+    public IActionResult Register(string fullName, string email, string password, string dob, string phoneNumber, string hometown, string major)
     {
-        // Check if the email already exists for a student
         if (Student.IsEmailExist(email))
         {
             ViewBag.ErrorMessage = "❌ This email has already been registered. Please choose another email.";
             return View();
         }
 
-        // If the email does not exist, save the student's data to the CSV file
-        Student.SaveStudent(fullName, email, password);
+        // Lưu vào Student.csv
+        Student.SaveStudent(fullName, email, password, dob, phoneNumber, hometown, major);
 
-        // Display a successful registration message without redirecting
         ViewBag.SuccessMessage = "✅ Registration successful! You can log in now.";
         return View();
     }
+
+
+
+
 }
 
