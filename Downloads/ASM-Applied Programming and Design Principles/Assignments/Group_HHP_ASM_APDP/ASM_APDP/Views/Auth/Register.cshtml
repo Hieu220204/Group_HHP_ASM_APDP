@@ -1,0 +1,39 @@
+﻿<form method="post" asp-action="Register" asp-controller="Auth">
+    <div class="form-group">
+        <label for="fullName">Full Name:</label>
+        <input type="text" class="form-control" id="fullName" name="fullName" required />
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" name="email" required />
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" name="password" required />
+    </div>
+
+    <div class="form-group">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" class="form-control" id="dob" name="dob" required />
+    </div>
+
+    <div class="form-group">
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required />
+    </div>
+
+    <div class="form-group">
+        <label for="hometown">Hometown:</label>
+        <input type="text" class="form-control" id="hometown" name="hometown" required />
+    </div>
+
+    <div class="form-group">
+        <label for="major">Major:</label>
+        <input type="text" class="form-control" id="major" name="major" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+    <a href="@Url.Action("Login", "Auth")" class="btn btn-secondary">Back to Login</a>
+</form>

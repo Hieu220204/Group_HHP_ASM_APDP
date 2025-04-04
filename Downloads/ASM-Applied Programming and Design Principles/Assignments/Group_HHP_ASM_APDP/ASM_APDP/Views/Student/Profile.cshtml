@@ -1,0 +1,39 @@
+﻿@model ASM_APDP.Models.Student
+
+<h2>Update Profile</h2>
+
+<form method="post" action="/Student/UpdateProfile">
+    <div class="form-group">
+        <label for="FullName">Full Name</label>
+        <input type="text" class="form-control" id="FullName" name="FullName" value="@Model.FullName" required />
+    </div>
+    <div class="form-group">
+        <label for="DateOfBirth">Date of Birth</label>
+        <input type="text" class="form-control" id="DateOfBirth" name="DateOfBirth" value="@Model.DateOfBirth" required />
+    </div>
+    <div class="form-group">
+        <label for="PhoneNumber">Phone Number</label>
+        <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" required />
+    </div>
+    <div class="form-group">
+        <label for="Hometown">Hometown</label>
+        <input type="text" class="form-control" id="Hometown" name="Hometown" value="@Model.Hometown" required />
+    </div>
+    <div class="form-group">
+        <label for="Major">Major</label>
+        <input type="text" class="form-control" id="Major" name="Major" value="@Model.Major" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Update Profile</button>
+</form>
+
+<!-- Hiển thị thông báo nếu có -->
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["Message"]
+    </div>
+}
+
+<div>
+    <a href="@Url.Action("StudentHome", "Student")" class="btn btn-primary">Back to Home</a>
+</div>
