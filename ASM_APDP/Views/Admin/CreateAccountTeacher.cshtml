@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Create Teacher Account";
+}
+
+<h2>Create Teacher Account</h2>
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div style="color:red;">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+@if (ViewBag.SuccessMessage != null)
+{
+    <div style="color:green;">
+        @ViewBag.SuccessMessage
+    </div>
+}
+
+<form method="post" action="/Admin/CreateTeacherAccount">
+    <div>
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" required />
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+    </div>
+    <div>
+        <button type="submit">Create Account</button>
+    </div>
+</form>
+
+<a href="/Admin/AdminHome">Back to Home</a>

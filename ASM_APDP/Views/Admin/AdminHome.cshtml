@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<h2>Welcome to Admin Home</h2>
+
+
+<form method="post" action="@Url.Action("Logout", "Admin")">
+    <button type="submit">Logout</button>
+</form>
+
+
+<a href="@Url.Action("CreateAccountTeacher", "Admin")">
+    <button>Create Teacher Account</button>
+</a>

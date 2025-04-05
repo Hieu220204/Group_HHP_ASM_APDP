@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Manage Grades";
+}
+
+<h2>Manage Grades</h2>
+
+<table border="1">
+    <tr>
+        <th>Student ID</th>
+        <th>Course ID</th>
+        <th>Grade</th>
+    </tr>
+    @foreach (var grade in Model)
+    {
+    <tr>
+        <td>@grade.StudentID</td>
+        <td>@grade.CourseID</td>
+        <td>@grade.Score</td>
+    </tr>
+    }
+</table>
+
+<h3>Add New Grade</h3>
+<form method="post" action="@Url.Action("AddGrade", "Teacher")">
+    <label>Student ID:</label>
+    <input type="text" name="studentID" required />
+    <label>Course ID:</label>
+    <input type="text" name="courseID" required />
+    <label>Grade:</label>
+    <input type="text" name="grade" required />
+    <button type="submit">Add Grade</button>
+    <a href="/Teacher/TeacherHome">Back to Home Page</a>
+</form>

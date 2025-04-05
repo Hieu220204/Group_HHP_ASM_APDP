@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Teacher Home";
+}
+
+<h2>Welcome to Teacher Home</h2>
+<p>This is the teacher's dashboard where you can access various features.</p>
+
+<!-- Navigation Links -->
+<ul>
+    <li><a href="/Teacher/ManageGrade">Manage Grades</a></li>
+    <li><a href="/Teacher/ManageAttendance">Manage Attendance</a></li>
+    <li><a href="@Url.Action("ChangePasswordTeacher", "Teacher")">Change Password</a></li>
+    <li><a href="@Url.Action("Logout", "Teacher")">Logout</a></li>
+</ul>
