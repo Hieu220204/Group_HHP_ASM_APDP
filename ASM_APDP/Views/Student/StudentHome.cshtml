@@ -4,10 +4,27 @@
 
 <h2>Welcome, @User.Identity.Name!</h2>
 
+
 <a href="@Url.Action("Profile", "Student")" class="btn btn-primary">View Profile</a>
 
 
 <a href="@Url.Action("ChangePasswordStudent", "Student")" class="btn btn-warning">Change Password</a>
+
+
+<!-- Nút Xem Lịch Học -->
+<a href="@Url.Action("ViewSchedule", "Student")">
+    <button>View Schedule</button>
+</a>
+
+
+<a href="@Url.Action("UpdateProfile", "Student")">
+    <button>Update Profile</button>
+</a>
+
+
+
+
+<!-- Nút Logout -->
 
 <form method="post" action="@Url.Action("Logout", "Auth")">
     <button type="submit" class="btn btn-danger">Logout</button>

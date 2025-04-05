@@ -1,66 +1,88 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace ASM_APDP.Models
 {
     public class Teacher
     {
+
+        
+
+
         public string FullName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Subject { get; set; }
+        public string DOB { get; set; }
 
-        // Save teacher information to Teacher.csv
+        public string Address { get; set; } // Thêm thuộc tính Address vào lớp Teacher
+
+        // ✅ Constructor mặc định để tránh lỗi CS8618
+
+        public Teacher()
+        {
+            FullName = string.Empty;
+            Email = string.Empty;
+            Password = string.Empty;
+            PhoneNumber = string.Empty;
+            Subject = string.Empty;
+            DOB = string.Empty;
+            Address = string.Empty; // Khởi tạo Address
+        }
+
+        public static string FilePath => Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Data", "Teacher.csv");
+
         public static void SaveTeacher(string fullName, string email, string password)
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Data", "Teacher.csv");
-
-            // Check if the file exists, if not, create a new one
-            if (!File.Exists(filePath))
+            if (IsEmailExist(email))
             {
-                File.WriteAllText(filePath, "FullName,Email,Password\n");
+                throw new Exception("Email đã được đăng ký, vui lòng chọn email khác.");
             }
 
-            using (StreamWriter writer = new StreamWriter(filePath, true))
+            if (!File.Exists(FilePath))
             {
-                writer.WriteLine($"{fullName},{email},{password}");
+                File.WriteAllText(FilePath, "FullName,Email,Password,PhoneNumber,Subject,DOB\n");
+            }
+
+            using (StreamWriter writer = new StreamWriter(FilePath, true))
+            {
+                writer.WriteLine($"{fullName},{email},{password},,,"); // default thêm cột mới rỗng
             }
         }
 
-        // Check if the email already exists
         public static bool IsEmailExist(string email)
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Data", "Teacher.csv");
-
-            if (!File.Exists(filePath))
+            if (File.Exists(FilePath))
             {
-                return false;
-            }
-
-            foreach (var line in File.ReadLines(filePath))
-            {
-                var data = line.Split(',');
-                if (data.Length == 3 && data[1].Trim().Equals(email.Trim(), StringComparison.OrdinalIgnoreCase))
+                foreach (var line in File.ReadLines(FilePath).Skip(1))
                 {
-                    return true;
+                    var data = line.Split(',');
+                    if (data.Length >= 3 && data[1] == email)
+                        return true;
                 }
             }
-
             return false;
         }
 
-        // Get teacher information by email and password
-        public static Teacher GetTeacherByEmail(string email, string password)
+        public static Teacher? GetTeacherByUsername(string email, string password)
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Data", "Teacher.csv");
-
-            if (File.Exists(filePath))
+            if (File.Exists(FilePath))
             {
-                foreach (var line in File.ReadLines(filePath))
+                foreach (var line in File.ReadLines(FilePath).Skip(1))
                 {
                     var data = line.Split(',');
-                    if (data.Length == 3 && data[1] == email && data[2] == password)
+                    if (data.Length >= 3 && data[1] == email && data[2] == password)
                     {
-                        return new Teacher { FullName = data[0], Email = data[1], Password = data[2] };
+                        return new Teacher
+                        {
+                            FullName = data[0],
+                            Email = data[1],
+                            Password = data[2],
+                            PhoneNumber = data.Length > 3 ? data[3] : "",
+                            Subject = data.Length > 4 ? data[4] : "",
+                            DOB = data.Length > 5 ? data[5] : "",
+                            Address = data.Length > 6 ? data[6] : "" // Thêm Address vào đây
+                        };
                     }
                 }
             }
@@ -68,45 +90,45 @@ namespace ASM_APDP.Models
             return null;
         }
 
-        // Update the teacher's password
-        public static bool UpdatePassword(string email, string newPassword)
+        public static Teacher GetTeacherByEmail(string email, string password)
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Data", "Teacher.csv");
-            var tempFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Data", "Teacher_temp.csv");
-
-            if (!File.Exists(filePath))
+            if (File.Exists(FilePath))
             {
-                return false;
-            }
-
-            bool isUpdated = false;
-
-            using (var reader = new StreamReader(filePath))
-            using (var writer = new StreamWriter(tempFilePath))
-            {
-                string line;
-                while ((line = reader.ReadLine()) != null)
+                foreach (var line in File.ReadLines(FilePath).Skip(1))
                 {
                     var data = line.Split(',');
-
-                    if (data.Length == 3 && data[1] == email)
+                    if (data.Length >= 3 && data[1] == email)
                     {
-                        data[2] = newPassword; // Update the password
-                        isUpdated = true;
+                        return new Teacher
+                        {
+                            FullName = data[0],
+                            Email = data[1],
+                            Password = data[2],
+                            PhoneNumber = data.Length > 3 ? data[3] : "",
+                            Subject = data.Length > 4 ? data[4] : "",
+                            DOB = data.Length > 5 ? data[5] : "",
+                            Address = data.Length > 6 ? data[6] : "" // Thêm Address vào đây
+                        };
                     }
+                }
+            }
+            return null;
+        }
 
-                    writer.WriteLine(string.Join(",", data));
+        public static void UpdateTeacherProfile(Teacher updatedTeacher)
+        {
+            var lines = File.ReadAllLines(FilePath).ToList();
+            for (int i = 1; i < lines.Count; i++)
+            {
+                var data = lines[i].Split(',');
+                if (data.Length >= 3 && data[1] == updatedTeacher.Email)
+                {
+                    lines[i] = $"{updatedTeacher.FullName},{updatedTeacher.Email},{updatedTeacher.Password},{updatedTeacher.PhoneNumber},{updatedTeacher.Subject},{updatedTeacher.DOB},{updatedTeacher.Address}";
+                    break;
                 }
             }
 
-            // Replace the old file with the updated one
-            if (isUpdated)
-            {
-                File.Delete(filePath);
-                File.Move(tempFilePath, filePath);
-            }
-
-            return isUpdated;
+            File.WriteAllLines(FilePath, lines);
         }
     }
 }

@@ -7,13 +7,18 @@ namespace ASM_APDP.Models
 {
     public class Student
     {
+       
+
+
         public string FullName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+
         public string DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
         public string Hometown { get; set; }
         public string Major { get; set; }
+
 
         // Method to check if email already exists in the CSV file
         public static bool IsEmailExist(string email)
@@ -49,6 +54,8 @@ namespace ASM_APDP.Models
 
             return false; // If no match, return false
         }
+
+
 
         // Method to save student information to CSV
         public static void SaveStudent(string fullName, string email, string password, string dob, string phoneNumber, string hometown, string major)
@@ -86,6 +93,7 @@ namespace ASM_APDP.Models
 
                 while ((line = reader.ReadLine()) != null)
                 {
+
                     if (isFirstLine)
                     {
                         isFirstLine = false;
@@ -97,6 +105,7 @@ namespace ASM_APDP.Models
                     // If the email matches, return the student profile
                     if (data.Length == 7 && data[1] == email)
                     {
+                        // Removed the duplicate 'data' declaration here
                         return new Student
                         {
                             FullName = data[0],
@@ -109,10 +118,11 @@ namespace ASM_APDP.Models
                         };
                     }
                 }
-            }
 
-            return null; // If no match, return null
+                return null; // If no match, return null
+            }
         }
+
 
         // Method to update student profile information
         public static bool UpdateStudentInfo(string email, string fullName, string dob, string phoneNumber, string hometown, string major)
@@ -262,5 +272,28 @@ namespace ASM_APDP.Models
 
             return isUpdated;
         }
+
+        // Cập nhật thông tin sinh viên
+        public static void UpdateStudent(string email, string fullName, string password, string phoneNumber, string dob, string address)
+        {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Data", "Student.csv");
+            var lines = File.ReadAllLines(filePath).ToList();
+
+            for (int i = 1; i < lines.Count; i++) // Bỏ qua dòng tiêu đề
+            {
+                var data = lines[i].Split(',');
+                if (data[1] == email)
+                {
+                    lines[i] = $"{fullName},{email},{password},{phoneNumber},{dob},{address}";
+                    File.WriteAllLines(filePath, lines);
+                    return;
+                }
+            }
+
+            throw new Exception("Không tìm thấy sinh viên với email này.");
+        }
+
+
+
     }
 }

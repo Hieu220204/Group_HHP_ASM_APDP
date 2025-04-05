@@ -1,16 +1,13 @@
+
 ﻿using Microsoft.AspNetCore.Mvc;
 using ASM_APDP.Models;
+﻿﻿using ASM_APDP.Models;
+using Microsoft.AspNetCore.Mvc;
+
 
 public class AuthController : Controller
 {
     // Login page
-    public IActionResult Login()
-    {
-        return View();
-    }
-
-    // Handle login POST request
-    [HttpPost]
     public IActionResult Login(string email, string password)
     {
         // Admin login check
@@ -20,7 +17,7 @@ public class AuthController : Controller
         }
 
         // Check student login
-        var student = Student.GetStudentByEmail(email, password);  // This method now accepts both email and password
+        var student = Student.GetStudentByEmail(email, password);  // Ensure Student class is properly implemented
         if (student != null)
         {
             // Set session to store the user's email for future use
@@ -39,6 +36,7 @@ public class AuthController : Controller
         ViewBag.Error = "Invalid login credentials. Please try again.";
         return View();
     }
+
 
     // Logout action
     public IActionResult Logout()
@@ -77,4 +75,7 @@ public class AuthController : Controller
 
 
 }
+
+
+
 

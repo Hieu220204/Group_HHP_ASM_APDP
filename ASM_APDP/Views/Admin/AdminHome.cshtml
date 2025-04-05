@@ -4,12 +4,30 @@
 
 <h2>Welcome to Admin Home</h2>
 
-
-<form method="post" action="@Url.Action("Logout", "Admin")">
-    <button type="submit">Logout</button>
-</form>
-
+<!-- Back to Home Button -->
+<a href="@Url.Action("AdminHome", "Admin")">
+    <button style="margin-top: 10px;">Back to Home</button>
+</a>
 
 <a href="@Url.Action("CreateAccountTeacher", "Admin")">
     <button>Create Teacher Account</button>
 </a>
+
+<a href="@Url.Action("ManageCourse", "Admin")">
+    <button>Manage Courses</button>
+</a>
+
+
+<a href="@Url.Action("ManageSubject", "Admin")">
+    <button>Manage Subjects</button>
+</a>
+
+<a href="@Url.Action("ManageSchedule", "Admin")">
+    <button>Manage Subjects</button>
+</a>
+
+
+<!-- Nút Logout -->
+<form method="post" action="@Url.Action("Logout", "Admin")">
+    <button type="submit">Logout</button>
+</form>

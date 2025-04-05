@@ -1,3 +1,4 @@
+
 ﻿@{
     ViewData["Title"] = "Teacher Home";
 }
@@ -10,3 +11,21 @@
 
 <!-- Logout button -->
 <a href="@Url.Action("Logout", "Teacher")">Logout</a>
+
+﻿<h2>Welcome, Teacher</h2>
+
+<!-- Nút Xem Lịch Học -->
+<a href="@Url.Action("ViewSchedule", "Teacher")">
+    <button>View Class Schedule</button>
+</a>
+
+<!-- Button to Update Profile -->
+<a href="@Url.Action("UpdateProfile", "Teacher")">
+    <button>Update Profile</button>
+</a>
+
+<!-- Nút Logout -->
+<form method="post" action="@Url.Action("Logout", "Auth")">
+    <button type="submit">Logout</button>
+</form>
+
