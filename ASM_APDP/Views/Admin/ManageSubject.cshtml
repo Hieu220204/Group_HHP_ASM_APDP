@@ -1,0 +1,76 @@
+﻿@model List<ASM_APDP.Models.Subject>
+
+@{
+    Layout = "_Layout";
+    var selectedSubject = ViewBag.SelectedSubject as ASM_APDP.Models.Subject;
+}
+
+<h2>Manage Subjects</h2>
+
+<!-- Form thêm hoặc chỉnh sửa môn học -->
+<form method="post" action="@Url.Action(selectedSubject != null ? "EditSubject" : "AddSubject", "Admin")">
+    @if (selectedSubject != null)
+    {
+        <input type="hidden" name="SubjectCode" value="@selectedSubject.SubjectCode" />
+    }
+
+    <label>Subject Code:</label>
+    <input type="text" name="SubjectCode" value="@selectedSubject?.SubjectCode" required />
+
+    <label>Subject Name:</label>
+    <input type="text" name="SubjectName" value="@selectedSubject?.SubjectName" required />
+
+    <label>Description:</label>
+    <input type="text" name="Description" value="@selectedSubject?.Description" required />
+
+    <label>Teacher:</label>
+    <input type="text" name="Teacher" value="@selectedSubject?.Teacher" required />
+
+    <label>Status:</label>
+    <input type="text" name="Status" value="@selectedSubject?.Status" required />
+
+    <button type="submit">@(selectedSubject != null ? "Update Subject" : "Add Subject")</button>
+</form>
+
+<hr />
+
+<h3>Subject List</h3>
+<table border="1" cellpadding="5">
+    <thead>
+        <tr>
+            <th>Subject Code</th>
+            <th>Subject Name</th>
+            <th>Description</th>
+            <th>Teacher</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var subject in Model)
+        {
+            <tr>
+                <td>@subject.SubjectCode</td>
+                <td>@subject.SubjectName</td>
+                <td>@subject.Description</td>
+                <td>@subject.Teacher</td>
+                <td>@subject.Status</td>
+                <td>
+                    <!-- Edit Button - Open the same page with the subject data in input fields -->
+                    <a href="@Url.Action("EditSubject", "Admin", new { subjectCode = subject.SubjectCode })">Edit</a> |
+                    <!-- Delete Button -->
+                    <form method="post" action="@Url.Action("DeleteSubject", "Admin", new { subjectCode = subject.SubjectCode })" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Delete this subject?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Back to Admin Home Button -->
+<p>
+    <a href="@Url.Action("AdminHome", "Admin")">
+        <button type="button">← Back to Admin Home</button>
+    </a>
+</p>

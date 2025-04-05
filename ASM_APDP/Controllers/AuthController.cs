@@ -3,78 +3,84 @@ using ASM_APDP.Models;
 
 public class AuthController : Controller
 {
-    // Login page
+    // Trang đăng nhập
     public IActionResult Login()
     {
         return View();
     }
 
-    // Handle login POST request
+    // Xử lý yêu cầu đăng nhập (POST)
     [HttpPost]
     public IActionResult Login(string email, string password)
     {
-        // Admin login check
+        // Kiểm tra đăng nhập của Admin
         if (email == "admin@gmail.com" && password == "admin123")
         {
             return RedirectToAction("AdminHome", "Admin");
         }
 
-        // Check student login
-        var student = Student.GetStudentByEmail(email, password);  // This method now accepts both email and password
+        // Kiểm tra đăng nhập của sinh viên
+        var student = Student.GetStudentByEmail(email, password);  // Phương thức này bây giờ nhận cả email và mật khẩu
         if (student != null)
         {
-            // Set session to store the user's email for future use
+            // Lưu thông tin email của người dùng vào session
             HttpContext.Session.SetString("UserEmail", email);
             return RedirectToAction("StudentHome", "Student");
         }
 
-        // Check teacher login
-        var teacher = Teacher.GetTeacherByEmail(email, password);  // Now calling GetTeacherByEmail
+        // Kiểm tra đăng nhập của giáo viên
+        var teacher = Teacher.GetTeacherByEmail(email, password);  // Gọi phương thức GetTeacherByEmail
         if (teacher != null)
         {
             return RedirectToAction("TeacherHome", "Teacher");
         }
 
-        // If no match found for both student and teacher, show error message
-        ViewBag.Error = "Invalid login credentials. Please try again.";
+        // Nếu không tìm thấy tài khoản sinh viên hoặc giáo viên, hiển thị thông báo lỗi
+        ViewBag.Error = "Thông tin đăng nhập không hợp lệ. Vui lòng thử lại.";
         return View();
     }
 
-    // Logout action
+    // Hành động đăng xuất
     public IActionResult Logout()
     {
-        // Clear session data to log out the user
+        // Xóa dữ liệu session khi đăng xuất
         HttpContext.Session.Clear();
-        return RedirectToAction("Login", "Auth");  // Redirect to Login page
+        return RedirectToAction("Login", "Auth");  // Chuyển hướng đến trang Đăng nhập
     }
 
-    // Register page
+    // Trang đăng ký
     public IActionResult Register()
     {
         return View();
     }
 
-    // Handle registration POST request
-
-
+    // Xử lý yêu cầu đăng ký (POST)
     [HttpPost]
     public IActionResult Register(string fullName, string email, string password, string dob, string phoneNumber, string hometown, string major)
     {
-        if (Student.IsEmailExist(email))
+        if (Student.IsEmailExist(email))  // Kiểm tra nếu email đã tồn tại
         {
-            ViewBag.ErrorMessage = "❌ This email has already been registered. Please choose another email.";
+            ViewBag.ErrorMessage = "❌ Email này đã được đăng ký. Vui lòng chọn email khác.";
             return View();
         }
 
-        // Lưu vào Student.csv
-        Student.SaveStudent(fullName, email, password, dob, phoneNumber, hometown, major);
+        // Lưu sinh viên mới vào danh sách (sử dụng SaveStudents)
+        var students = Student.GetAllStudents();  // Lấy danh sách tất cả sinh viên
+        students.Add(new Student
+        {
+            FullName = fullName,
+            Email = email,
+            Password = password,
+            DateOfBirth = dob,
+            PhoneNumber = phoneNumber,
+            Hometown = hometown,
+            Major = major
+        });
 
-        ViewBag.SuccessMessage = "✅ Registration successful! You can log in now.";
+        // Lưu danh sách sinh viên đã cập nhật vào CSV
+        Student.SaveStudents(students);  // Gọi SaveStudents để lưu danh sách đã thay đổi
+
+        ViewBag.SuccessMessage = "✅ Đăng ký thành công! Bạn có thể đăng nhập ngay bây giờ.";
         return View();
     }
-
-
-
-
 }
-

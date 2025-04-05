@@ -4,12 +4,25 @@
 
 <h2>Welcome to Admin Home</h2>
 
-
 <form method="post" action="@Url.Action("Logout", "Admin")">
     <button type="submit">Logout</button>
 </form>
 
-
 <a href="@Url.Action("CreateAccountTeacher", "Admin")">
     <button>Create Teacher Account</button>
 </a>
+
+<!-- Nút Manage Course -->
+<a href="@Url.Action("ManageCourse", "Admin")">
+    <button>Manage Course</button>
+</a>
+
+<a href="@Url.Action("ManageSubject", "Admin")">
+    <button>Manage Subject</button>
+</a>
+
+<a href="@Url.Action("ManageSchedule", "Admin")">
+    <button type="button">Manage Schedule</button>
+</a>
+
+<a href="@Url.Action("ManageAccount", "Admin")" class="btn btn-primary">Manage Accounts</a>

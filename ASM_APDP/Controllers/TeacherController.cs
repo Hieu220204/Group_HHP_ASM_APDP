@@ -1,26 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ASM_APDP.Models;
+using Microsoft.AspNetCore.Http;
 
 public class TeacherController : Controller
 {
-    // Action to show TeacherHome page
     public IActionResult TeacherHome()
     {
-        return View(); // Render TeacherHome view
+        return View();
     }
 
-    // Action to display the ChangePasswordTeacher page
     public IActionResult ChangePasswordTeacher()
     {
-        return View(); // Render ChangePasswordTeacher view
+        return View();
     }
 
-    // Handle password change
     [HttpPost]
     public IActionResult ChangePasswordTeacher(string email, string oldPassword, string newPassword, string confirmPassword)
     {
-        // Check teacher's credentials with email and old password
-        var teacher = Teacher.GetTeacherByEmail(email, oldPassword); // Use GetTeacherByEmail method
+        var teacher = Teacher.GetTeacherByEmail(email, oldPassword);
 
         if (teacher == null)
         {
@@ -40,8 +37,7 @@ public class TeacherController : Controller
             return View();
         }
 
-        // Update the password in the system
-        bool isUpdated = Teacher.UpdatePassword(email, newPassword); // Call method to update teacher's password
+        bool isUpdated = Teacher.UpdatePassword(email, newPassword);
 
         if (isUpdated)
         {
@@ -55,11 +51,69 @@ public class TeacherController : Controller
         return View();
     }
 
-    // Action to log out
+    public IActionResult ManageGrade()
+    {
+        Grade.EnsureFileExists();
+        var grades = Grade.GetAllGrades();
+        return View(grades);
+    }
+
+    [HttpPost]
+    public IActionResult AddGrade(Grade grade)
+    {
+        if (ModelState.IsValid)
+        {
+            Grade.AddGrade(grade);
+            return RedirectToAction("ManageGrade");
+        }
+        return View("ManageGrade", Grade.GetAllGrades());
+    }
+
+    public IActionResult EditGrade(string fullName, string email, string subject)
+    {
+        var grade = Grade.GetGradeByKey(fullName, email, subject);
+        if (grade != null)
+        {
+            return View(grade);
+        }
+        return RedirectToAction("ManageGrade");
+    }
+
+    [HttpPost]
+    public IActionResult EditGrade(Grade updatedGrade)
+    {
+        var success = Grade.UpdateGrade(updatedGrade);
+        if (success)
+        {
+            TempData["SuccessMessage"] = "Grade updated successfully!";
+        }
+        else
+        {
+            TempData["ErrorMessage"] = "Failed to update grade.";
+        }
+
+        return RedirectToAction("ManageGrade");
+    }
+
+    [HttpPost]
+    public IActionResult DeleteGrade(string fullName, string email, string subject)
+    {
+        var success = Grade.DeleteGrade(fullName, email, subject);
+        if (success)
+        {
+            TempData["SuccessMessage"] = "Grade deleted successfully.";
+        }
+        else
+        {
+            TempData["ErrorMessage"] = "Failed to delete grade.";
+        }
+
+        return RedirectToAction("ManageGrade");
+    }
+
     public IActionResult Logout()
     {
-        // Clear session data to log out
         HttpContext.Session.Clear();
-        return RedirectToAction("Login", "Auth"); // Redirect to the login page
+        return RedirectToAction("Login", "Auth");
     }
 }

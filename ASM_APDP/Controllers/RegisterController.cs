@@ -22,11 +22,24 @@ public class RegisterController : Controller
                 return View();
             }
 
-            // Lưu thông tin sinh viên vào CSV file
-            Student.SaveStudent(fullName, email, password, dob, numberPhone, hometown, major);
+            // Lưu thông tin sinh viên vào CSV file (using SaveStudents)
+            var students = Student.GetAllStudents();  // Get all existing students first
+            students.Add(new Student
+            {
+                FullName = fullName,
+                Email = email,
+                Password = password,
+                DateOfBirth = dob,
+                PhoneNumber = numberPhone,
+                Hometown = hometown,
+                Major = major
+            });
+
+            // Save the updated list of students back to the CSV
+            Student.SaveStudents(students);
 
             // Kiểm tra xem dữ liệu có được lưu thành công không
-            if (Student.IsEmailExist(email))
+            if (Student.IsEmailExist(email))  // Ensure the email exists after saving
             {
                 TempData["SuccessMessage"] = "Registration successful! You can log in now.";
                 return RedirectToAction("Login", "Auth");
@@ -43,5 +56,6 @@ public class RegisterController : Controller
             return View();
         }
     }
+
 
 }

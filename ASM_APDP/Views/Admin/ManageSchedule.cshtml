@@ -1,0 +1,79 @@
+﻿@model List<ASM_APDP.Models.Schedule>
+
+@{
+    Layout = "_Layout";
+    var selectedSchedule = ViewBag.SelectedSchedule as ASM_APDP.Models.Schedule;
+}
+
+<h2>Manage Schedule</h2>
+
+<!-- Form thêm hoặc chỉnh sửa lịch học -->
+<form method="post" action="@Url.Action("EditSchedule", "Admin")">
+    @if (selectedSchedule != null)
+    {
+        <input type="hidden" name="ClassName" value="@selectedSchedule.ClassName" />
+    }
+
+    <label>Course Name:</label>
+    <input type="text" name="CourseName" value="@selectedSchedule?.CourseName" required />
+
+    <label>Class Name:</label>
+    <input type="text" name="ClassName" value="@selectedSchedule?.ClassName" required />
+
+    <label>Teacher Name:</label>
+    <input type="text" name="Teacher" value="@selectedSchedule?.Teacher" required />
+
+    <label>Date:</label>
+    <input type="date" name="Date" value="@selectedSchedule?.Date.ToString("yyyy-MM-dd")" required />
+
+    <label>Time:</label>
+    <input type="time" name="Time" value="@selectedSchedule?.Time" required />
+
+    <label>Status:</label>
+    <input type="text" name="Status" value="@selectedSchedule?.Status" required />
+
+    <button type="submit">Update Schedule</button>
+</form>
+
+<hr />
+
+<h3>Schedule List</h3>
+<table border="1" cellpadding="5">
+    <thead>
+        <tr>
+            <th>Course Name</th>
+            <th>Class Name</th>
+            <th>Teacher</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var schedule in Model)
+        {
+            <tr>
+                <td>@schedule.CourseName</td>
+                <td>@schedule.ClassName</td>
+                <td>@schedule.Teacher</td>
+                <td>@schedule.Date.ToString("yyyy-MM-dd")</td>
+                <td>@schedule.Time</td>
+                <td>@schedule.Status</td>
+                <td>
+                    <a href="@Url.Action("EditSchedule", "Admin", new { className = schedule.ClassName })">Edit</a> |
+                    <form method="post" action="@Url.Action("DeleteSchedule", "Admin", new { className = schedule.ClassName })" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Delete this schedule?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Button to go back to AdminHome -->
+<p>
+    <a href="@Url.Action("AdminHome", "Admin")">
+        <button type="button">← Back to Admin Home</button>
+    </a>
+</p>

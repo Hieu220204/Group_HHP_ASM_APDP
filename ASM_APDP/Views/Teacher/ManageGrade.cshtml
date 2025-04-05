@@ -1,0 +1,59 @@
+﻿@model List<ASM_APDP.Models.Grade>
+
+@{
+    ViewData["Title"] = "Manage Grade";
+}
+
+<h2>Manage Grade</h2>
+<!-- Form Thêm Điểm -->
+<h3>Add Grade</h3>
+<form method="post" action="@Url.Action("AddGrade", "Teacher")">
+    <div>
+        <label>Full Name</label>
+        <input type="text" name="FullName" required />
+    </div>
+    <div>
+        <label>Email</label>
+        <input type="email" name="Email" required />
+    </div>
+    <div>
+        <label>Subject</label>
+        <input type="text" name="Subject" required />
+    </div>
+    <div>
+        <label>Score</label>
+        <input type="number" name="Score" step="0.1" required />
+    </div>
+    <div>
+        <label>Notes</label>
+        <input type="text" name="Notes" />
+    </div>
+    <button type="submit">Add Grade</button>
+</form>
+
+
+<!-- Bảng điểm -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Subject</th>
+            <th>Score</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var grade in Model)
+        {
+            <tr>
+                <td>@grade.FullName</td>
+                <td>@grade.Email</td>
+                <td>@grade.Subject</td>
+                <td>@grade.Score</td>
+                <td>@grade.Notes</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
