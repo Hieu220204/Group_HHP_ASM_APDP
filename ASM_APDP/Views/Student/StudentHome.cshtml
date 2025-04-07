@@ -1,14 +1,54 @@
-﻿@{
+﻿@model ASM_APDP.Models.Student
+@{
     Layout = "_Layout";
 }
 
-<h2>Welcome, @User.Identity.Name!</h2>
+<h2>Xin chào, @Model.FullName!</h2>
 
-<a href="@Url.Action("Profile", "Student")" class="btn btn-primary">View Profile</a>
-
-
-<a href="@Url.Action("ChangePasswordStudent", "Student")" class="btn btn-warning">Change Password</a>
+<a href="@Url.Action("ChangePasswordStudent", "Student")" class="btn btn-warning">Đổi mật khẩu</a>
 
 <form method="post" action="@Url.Action("Logout", "Auth")">
-    <button type="submit" class="btn btn-danger">Logout</button>
+    <button type="submit" class="btn btn-danger">Đăng xuất</button>
+</form>
+
+<hr />
+<h3>📋 Thông tin cá nhân</h3>
+
+@if(ViewBag.SuccessMessage != null)
+{
+<div class="alert alert-success">@ViewBag.SuccessMessage</div>
+}
+
+<form method="post" action="@Url.Action("UpdateProfile", "Student")">
+    <div class="form-group">
+        <label>Họ và tên:</label>
+        <input name="fullName" class="form-control" value="@Model.FullName" />
+    </div>
+
+    <div class="form-group">
+        <label>Email:</label>
+        <input class="form-control" value="@Model.Email" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>Số điện thoại:</label>
+        <input name="phoneNumber" class="form-control" value="@Model.PhoneNumber" />
+    </div>
+
+    <div class="form-group">
+        <label>Ngày sinh:</label>
+        <input class="form-control" value="@Model.DateOfBirth" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>Quê quán:</label>
+        <input class="form-control" value="@Model.Hometown" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>Ngành học:</label>
+        <input class="form-control" value="@Model.Major" readonly />
+    </div>
+
+    <button type="submit" class="btn btn-success mt-2">Cập nhật thông tin</button>
 </form>

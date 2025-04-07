@@ -6,19 +6,34 @@ public class StudentController : Controller
     // Trang chủ của sinh viên
     public IActionResult StudentHome()
     {
-        return View();
+        var email = HttpContext.Session.GetString("UserEmail");
+
+        if (string.IsNullOrEmpty(email))
+            return RedirectToAction("Login", "Auth");
+
+        var student = Student.GetStudentByEmailOnly(email);
+
+        if (student != null)
+            return View(student);
+
+        return RedirectToAction("Login", "Auth");
     }
 
     // Trang xem thông tin cá nhân
     public IActionResult ViewProfile()
     {
-        var email = HttpContext.Session.GetString("UserEmail");
-        var student = Student.GetStudentByEmail(email);  // Lấy thông tin sinh viên từ email
+        var email = HttpContext.Session.GetString("UserEmail");  // Lấy email từ phiên làm việc
 
-        // Kiểm tra nếu sinh viên không null và ép kiểu lại nếu cần
+        if (string.IsNullOrEmpty(email))
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+
+        var student = Student.GetStudentByEmailOnly(email);  // Lấy sinh viên từ email
+
         if (student != null)
         {
-            return View(student);  // Trả về view với thông tin sinh viên
+            return View(student);  // Trả về View với thông tin sinh viên
         }
 
         return RedirectToAction("Login", "Auth");  // Nếu không tìm thấy, chuyển hướng đến trang đăng nhập
@@ -29,18 +44,26 @@ public class StudentController : Controller
     public IActionResult UpdateProfile(string fullName, string phoneNumber)
     {
         var email = HttpContext.Session.GetString("UserEmail");
-        var student = Student.GetStudentByEmail(email);  // Lấy thông tin sinh viên từ email
 
-        // Kiểm tra nếu sinh viên tồn tại và ép kiểu lại đối tượng student
-        if (student != null)
+        if (string.IsNullOrEmpty(email))
         {
-            
-
-            // Cập nhật lại danh sách sinh viên sau khi chỉnh sửa thông tin
-            Student.SaveStudents(Student.GetAllStudents());
-            ViewBag.SuccessMessage = "✅ Cập nhật thông tin thành công!";
+            return RedirectToAction("Login", "Auth");
         }
 
-        return View("ViewProfile", student);  // Trả về view "ViewProfile" với thông tin sinh viên đã cập nhật
+        var students = Student.GetAllStudents();
+        var student = students.FirstOrDefault(s => s.Email == email);
+
+        if (student != null)
+        {
+            student.FullName = fullName;
+            student.PhoneNumber = phoneNumber;
+
+            Student.SaveStudents(students);  // Lưu lại toàn bộ danh sách
+
+            ViewBag.SuccessMessage = "✅ Cập nhật thông tin thành công!";
+            return View("ViewProfile", student);
+        }
+
+        return RedirectToAction("Login", "Auth");
     }
 }

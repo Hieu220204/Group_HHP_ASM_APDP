@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace ASM_APDP.Models
+namespace Group_HHP_ASM_APDP.Models
 {
     public class Teacher
     {
@@ -72,7 +72,7 @@ namespace ASM_APDP.Models
         public static bool UpdatePassword(string email, string newPassword)
         {
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Data", "Teacher.csv");
-            var tempFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Data", "Teacher_temp.csv");
+            var tempFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Data", "Teacher.csv");
 
             if (!File.Exists(filePath))
             {

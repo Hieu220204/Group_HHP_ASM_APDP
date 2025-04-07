@@ -1,0 +1,4 @@
+attendanceID,studentID,courseID,date,status
+A001,S001,C001,2025-04-08,Present
+A002,S002,C001,2025-04-08,Absent
+A003,S001,C001,2025-04-09,Present

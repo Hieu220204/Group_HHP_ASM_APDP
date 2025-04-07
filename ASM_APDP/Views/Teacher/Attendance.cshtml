@@ -1,0 +1,31 @@
+﻿@model List<ASM_APDP.Models.Attendance>
+
+@{
+    ViewData["Title"] = "Attendance";
+}
+
+<h2>Attendance Records</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Attendance ID</th>
+            <th>Student ID</th>
+            <th>Course ID</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.AttendanceID</td>
+                <td>@item.StudentID</td>
+                <td>@item.CourseID</td>
+                <td>@item.Date.ToShortDateString()</td>
+                <td>@item.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
