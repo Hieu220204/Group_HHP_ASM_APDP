@@ -8,7 +8,7 @@
 <h2>Manage Schedule</h2>
 
 <!-- Form thêm hoặc chỉnh sửa lịch học -->
-<form method="post" action="@Url.Action("EditSchedule", "Admin")">
+<form method="post" action="@Url.Action(selectedSchedule != null ? "EditSchedule" : "AddSchedule", "Admin")">
     @if (selectedSchedule != null)
     {
         <input type="hidden" name="ClassName" value="@selectedSchedule.ClassName" />
@@ -32,8 +32,9 @@
     <label>Status:</label>
     <input type="text" name="Status" value="@selectedSchedule?.Status" required />
 
-    <button type="submit">Update Schedule</button>
+    <button type="submit">@((selectedSchedule != null) ? "Update Schedule" : "Add Schedule")</button>
 </form>
+
 
 <hr />
 

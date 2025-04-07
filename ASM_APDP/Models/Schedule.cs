@@ -44,16 +44,25 @@ namespace ASM_APDP.Models
         // Add a schedule
         public static void AddSchedule(Schedule schedule)
         {
-            if (!File.Exists(filePath))
+            try
             {
-                File.WriteAllText(filePath, "CourseName,ClassName,Teacher,Date,Time,Status\n");
-            }
+                if (!File.Exists(filePath))
+                {
+                    File.WriteAllText(filePath, "CourseName,ClassName,Teacher,Date,Time,Status\n");
+                }
 
-            using (var writer = new StreamWriter(filePath, true))
+                using (var writer = new StreamWriter(filePath, true))
+                {
+                    writer.WriteLine($"{schedule.CourseName},{schedule.ClassName},{schedule.Teacher},{schedule.Date},{schedule.Time},{schedule.Status}");
+                }
+            }
+            catch (Exception ex)
             {
-                writer.WriteLine($"{schedule.CourseName},{schedule.ClassName},{schedule.Teacher},{schedule.Date},{schedule.Time},{schedule.Status}");
+                // Log the error
+                Console.WriteLine($"Error writing to file: {ex.Message}");
             }
         }
+
 
         // Get schedule by class name
         public static Schedule GetScheduleByClassName(string className)

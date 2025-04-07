@@ -111,6 +111,89 @@ public class TeacherController : Controller
         return RedirectToAction("ManageGrade");
     }
 
+    // Trang quản lý điểm danh
+    public IActionResult ManageAttendance()
+    {
+        Attendance.EnsureFileExists();
+        var attendances = Attendance.GetAll();
+        return View(attendances);
+    }
+
+    // Trang thêm điểm danh
+    public IActionResult AddAttendance()
+    {
+        return View();
+    }
+
+    // Thêm điểm danh
+    [HttpPost]
+    public IActionResult AddAttendance(Attendance attendance)
+    {
+        if (ModelState.IsValid)
+        {
+            Attendance.Add(attendance);
+            return RedirectToAction("ManageAttendance");
+        }
+
+        return View();
+    }
+
+    // Trang chỉnh sửa điểm danh
+    public IActionResult EditAttendance(string sessionID)
+    {
+        // Tìm buổi điểm danh dựa trên SessionID
+        var attendance = Attendance.GetAll().FirstOrDefault(a => a.SessionID == sessionID);
+
+        if (attendance == null)
+        {
+            return NotFound();  // Nếu không tìm thấy dữ liệu, trả về NotFound
+        }
+
+        // Chuyển dữ liệu vào ViewBag hoặc ViewData
+        return View(attendance);
+    }
+
+
+    // Chỉnh sửa điểm danh
+    [HttpPost]
+    public IActionResult EditAttendance(Attendance att)
+    {
+        if (ModelState.IsValid)
+        {
+            var updated = Attendance.Update(att);
+            if (updated)
+            {
+                TempData["SuccessMessage"] = "Attendance updated successfully!";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Failed to update attendance.";
+            }
+
+            return RedirectToAction("ManageAttendance");
+        }
+        return View(att);
+    }
+
+    // Xóa điểm danh
+    [HttpPost]
+    public IActionResult DeleteAttendance(string sessionID)
+    {
+        var deleted = Attendance.Delete(sessionID);
+        if (deleted)
+        {
+            TempData["SuccessMessage"] = "Attendance deleted successfully.";
+        }
+        else
+        {
+            TempData["ErrorMessage"] = "Failed to delete attendance.";
+        }
+
+        return RedirectToAction("ManageAttendance");
+    }
+
+   
+
     public IActionResult Logout()
     {
         HttpContext.Session.Clear();

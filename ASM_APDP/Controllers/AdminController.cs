@@ -146,8 +146,14 @@ public class AdminController : Controller
     [HttpPost]
     public IActionResult AddSchedule(Schedule schedule)
     {
-        Schedule.AddSchedule(schedule);
-        return RedirectToAction("ManageSchedule");
+        if (ModelState.IsValid)
+        {
+            Schedule.AddSchedule(schedule);  // Call the method to add the schedule to the CSV
+            return RedirectToAction("ManageSchedule");  // Redirect to the manage schedule page
+        }
+
+        // If model state is invalid, return the same view with the error messages
+        return View("ManageSchedule", Schedule.GetAllSchedules());
     }
 
     // Edit Schedule Page (For getting schedule details to show in input fields)
