@@ -9,6 +9,11 @@
 
 <a href="@Url.Action("ChangePasswordStudent", "Student")" class="btn btn-warning">Change Password</a>
 
+<a href="@Url.Action("ViewSchedule", "Student")" class="btn btn-primary">View My Schedule</a>
+
+<a href="@Url.Action("ViewGrade", "Grade", new { studentEmail = User.Identity.Name })" class="btn btn-primary">View Grades</a>
+
+
 <form method="post" action="@Url.Action("Logout", "Auth")">
     <button type="submit" class="btn btn-danger">Logout</button>
 </form>

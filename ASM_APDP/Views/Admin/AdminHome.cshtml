@@ -124,23 +124,26 @@
         <button type="submit">Logout</button>
     </form>
 
-    <a href="@Url.Action("CreateAccountTeacher", "Admin")">
+    <a href="@Url.Action("Create", "TeacherAccount")">
         <button>Create Teacher Account</button>
     </a>
 
+
+
     <!-- Nút Manage Course -->
-    <a href="@Url.Action("ManageCourse", "Admin")">
+    <a href="@Url.Action("ManageCourse", "Course")">
         <button>Manage Course</button>
     </a>
 
-    <a href="@Url.Action("ManageSubject", "Admin")">
+
+    <a href="@Url.Action("ManageSubject", "Subject")">
         <button>Manage Subject</button>
     </a>
 
-    <a href="@Url.Action("ManageSchedule", "Admin")">
-        <button type="button">Manage Schedule</button>
+
+    <a href="@Url.Action("ManageSchedule", "Schedule")">
+        <button>Manage Schedule</button>
     </a>
 
-    <a href="@Url.Action("ManageAccount", "Admin")" class="btn btn-primary">Manage Accounts</a>
 </body>
 </html>

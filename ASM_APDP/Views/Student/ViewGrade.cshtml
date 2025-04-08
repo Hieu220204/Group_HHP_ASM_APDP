@@ -1,0 +1,37 @@
+﻿@model List<ASM_APDP.Models.Grade>
+
+@{
+    Layout = "_Layout";
+}
+
+<h2>Grades for @Model.FirstOrDefault()?.FullName</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Score</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var grade in Model)
+            {
+                <tr>
+                    <td>@grade.FullName</td>
+                    <td>@grade.Subject</td>
+                    <td>@grade.Score</td>
+                    <td>@grade.Notes</td>
+                </tr>
+            }
+
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No grades available for this student.</p>
+}

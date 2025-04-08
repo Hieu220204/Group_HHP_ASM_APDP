@@ -1,0 +1,36 @@
+﻿@model List<ASM_APDP.Models.Schedule>
+
+@{
+    ViewData["Title"] = "Student Schedule";
+}
+
+<h2>My Schedule</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Class Name</th>
+                <th>Subject</th>
+                <th>Day</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var schedule in Model)
+            {
+                <tr>
+                    <td>@schedule.ClassName</td>
+                    <td>@schedule.CourseName</td>
+                    <td>@schedule.Date.ToString("dddd, MMM dd yyyy")</td>
+                    <td>@schedule.Time</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>You have no scheduled classes.</p>
+}

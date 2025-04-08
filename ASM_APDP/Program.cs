@@ -1,4 +1,11 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using ASM_APDP.Services;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<CourseService>();
+builder.Services.AddTransient<SubjectService>();
+builder.Services.AddTransient<ScheduleService>();
+builder.Services.AddTransient<GradeService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -13,6 +20,8 @@ builder.Services.AddSession(options =>
 });
 
 var app = builder.Build();
+
+
 
 // Use session middleware
 app.UseSession();

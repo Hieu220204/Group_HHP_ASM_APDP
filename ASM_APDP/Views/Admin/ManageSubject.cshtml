@@ -8,7 +8,7 @@
 <h2>Manage Subjects</h2>
 
 <!-- Form thêm hoặc chỉnh sửa môn học -->
-<form method="post" action="@Url.Action(selectedSubject != null ? "EditSubject" : "AddSubject", "Admin")">
+<form method="post" action="@Url.Action(selectedSubject != null ? "Edit" : "Add", "Subject")">
     @if (selectedSubject != null)
     {
         <input type="hidden" name="SubjectCode" value="@selectedSubject.SubjectCode" />
@@ -57,9 +57,9 @@
                 <td>@subject.Status</td>
                 <td>
                     <!-- Edit Button - Open the same page with the subject data in input fields -->
-                    <a href="@Url.Action("EditSubject", "Admin", new { subjectCode = subject.SubjectCode })">Edit</a> |
+                    <a href="@Url.Action("Edit", "Subject", new { subjectCode = subject.SubjectCode })">Edit</a>  |
                     <!-- Delete Button -->
-                    <form method="post" action="@Url.Action("DeleteSubject", "Admin", new { subjectCode = subject.SubjectCode })" style="display:inline;">
+                    <form method="post" action="@Url.Action("Delete", "Subject", new { subjectCode = subject.SubjectCode })">
                         <button type="submit" onclick="return confirm('Delete this subject?')">Delete</button>
                     </form>
                 </td>

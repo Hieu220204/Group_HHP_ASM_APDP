@@ -8,10 +8,10 @@
 <h2>Manage Courses</h2>
 
 <!-- Form thêm hoặc chỉnh sửa khóa học -->
-<form method="post" action="@Url.Action(selectedCourse != null ? "EditCourse" : "AddCourse", "Admin")">
+<form method="post" action="@Url.Action(selectedCourse != null ? "Edit" : "Add", "Course")">
     @if (selectedCourse != null)
     {
-        <input type="hidden" name="Id" value="@selectedCourse.Id" />
+        <input type="hidden" name="id" value="@selectedCourse.Id" />
     }
 
     <label>Course Name:</label>
@@ -56,8 +56,8 @@
                 <td>@course.Duration</td>
                 <td>@course.Status</td>
                 <td>
-                    <a href="@Url.Action("EditCourse", "Admin", new { id = course.Id })">Edit</a> |
-                    <form method="post" action="@Url.Action("DeleteCourse", "Admin", new { id = course.Id })" style="display:inline;">
+                    <a href="@Url.Action("Edit", "Course", new { id = course.Id })">Edit</a> |
+                    <form method="post" action="@Url.Action("Delete", "Course", new { id = course.Id })" style="display:inline;">
                         <button type="submit" onclick="return confirm('Delete this course?')">Delete</button>
                     </form>
                 </td>
@@ -65,6 +65,7 @@
         }
     </tbody>
 </table>
+
 <!-- Nút trở về trang AdminHome -->
 <p>
     <a href="@Url.Action("AdminHome", "Admin")">

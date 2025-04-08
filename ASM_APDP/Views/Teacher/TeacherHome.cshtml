@@ -6,13 +6,19 @@
 <p>This is the teacher's dashboard where you can access various features.</p>
 
 <!-- Button to change password -->
-<a href="@Url.Action("ChangePasswordTeacher", "Teacher")">Change Password</a>
+<a href="@Url.Action("ChangePasswordTeacher", "ChangePassword")">Change Password</a>
+
+
 
 <!-- Logout button -->
 <a href="@Url.Action("Logout", "Teacher")">Logout</a>
 
 <!-- Manage Grade Button -->
-<a href="@Url.Action("ManageGrade", "Teacher")" class="btn btn-primary">Manage Grade</a>
+<a href="@Url.Action("ManageGrade", "Grade")" class="btn btn-primary">Manage Grade</a>
 
-<!-- Manage Attendance Button -->
-<a href="@Url.Action("ManageAttendance", "Teacher")" class="btn btn-warning">Manage Attendance</a>
+<!-- View Class Schedule Button -->
+<a href="@Url.Action("ViewClassSchedule", "Schedule")" class="btn btn-primary">View Class Schedule</a>
+
+
+
+

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ASM_APDP.Models;
+using ASM_APDP.Services;
 
 public class StudentController : Controller
 {
@@ -42,5 +43,23 @@ public class StudentController : Controller
         }
 
         return View("ViewProfile", student);  // Trả về view "ViewProfile" với thông tin sinh viên đã cập nhật
+    }
+
+    private readonly ScheduleService _scheduleService;
+
+    // Constructor để inject ScheduleService
+    public StudentController(ScheduleService scheduleService)
+    {
+        _scheduleService = scheduleService;
+    }
+
+    // Action để xem lịch học của học sinh
+    public IActionResult ViewSchedule()
+    {
+        // Lấy tất cả lịch học từ ScheduleService
+        var schedules = _scheduleService.GetAllSchedules();
+
+        // Trả về view và truyền dữ liệu lịch học
+        return View("~/Views/Student/ViewSchedule.cshtml", schedules);
     }
 }
