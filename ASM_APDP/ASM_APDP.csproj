@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <None Include="wwwroot\Data\Admin.csv" />
-    <None Include="wwwroot\Data\Student.csv" />
   </ItemGroup>
 
   <ItemGroup>

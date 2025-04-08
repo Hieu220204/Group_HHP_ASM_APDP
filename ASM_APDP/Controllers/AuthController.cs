@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ASM_APDP.Models;
+using ASM_APDP.Controllers.StudentManage;
 
 public class AuthController : Controller
 {
@@ -20,7 +21,7 @@ public class AuthController : Controller
         }
 
         // Kiểm tra đăng nhập của sinh viên
-        var student = Student.GetStudentByEmail(email, password);  // Phương thức này bây giờ nhận cả email và mật khẩu
+        var student = StudentManagement.GetStudentByEmail(email, password);  // Phương thức này bây giờ nhận cả email và mật khẩu
         if (student != null)
         {
             // Lưu thông tin email của người dùng vào session
@@ -58,14 +59,14 @@ public class AuthController : Controller
     [HttpPost]
     public IActionResult Register(string fullName, string email, string password, string dob, string phoneNumber, string hometown, string major)
     {
-        if (Student.IsEmailExist(email))  // Kiểm tra nếu email đã tồn tại
+        if (StudentManagement.IsEmailExist(email))  // Kiểm tra nếu email đã tồn tại
         {
             ViewBag.ErrorMessage = "❌ Email này đã được đăng ký. Vui lòng chọn email khác.";
             return View();
         }
 
         // Lưu sinh viên mới vào danh sách (sử dụng SaveStudents)
-        var students = Student.GetAllStudents();  // Lấy danh sách tất cả sinh viên
+        var students = StudentManagement.GetAllStudents();  // Lấy danh sách tất cả sinh viên
         students.Add(new Student
         {
             FullName = fullName,
@@ -78,7 +79,7 @@ public class AuthController : Controller
         });
 
         // Lưu danh sách sinh viên đã cập nhật vào CSV
-        Student.SaveStudents(students);  // Gọi SaveStudents để lưu danh sách đã thay đổi
+        StudentManagement.SaveStudents(students);  // Gọi SaveStudents để lưu danh sách đã thay đổi
 
         ViewBag.SuccessMessage = "✅ Đăng ký thành công! Bạn có thể đăng nhập ngay bây giờ.";
         return View();

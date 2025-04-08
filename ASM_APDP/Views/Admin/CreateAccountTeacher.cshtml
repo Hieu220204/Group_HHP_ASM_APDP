@@ -2,6 +2,120 @@
     ViewData["Title"] = "Create Teacher Account";
 }
 
+<style>
+    body {
+        background-color: #f4f6f8;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h2 {
+        text-align: center;
+        color: #2c3e50;
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+
+    form {
+        width: 90%;
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+        form div {
+            margin-bottom: 20px;
+        }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+
+    input:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+    button {
+        background-color: #007bff;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+    .back-button {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+        .back-button button {
+            background-color: #6c757d;
+        }
+
+            .back-button button:hover {
+                background-color: #5a6268;
+            }
+
+    .success-message, .error-message {
+        width: 90%;
+        max-width: 500px;
+        margin: 10px auto;
+        padding: 15px 20px;
+        border-radius: 6px;
+        font-weight: 500;
+    }
+
+    .success-message {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .error-message {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    @@media (max-width: 600px) {
+        form
+
+    {
+        padding: 20px;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    }
+</style>
+
+
 <h2>Create Teacher Account</h2>
 
 @if (ViewBag.ErrorMessage != null)

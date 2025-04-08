@@ -4,35 +4,105 @@
     ViewData["Title"] = "Class Schedule";
 }
 
-<h2>Class Schedule</h2>
+<style>
+    .schedule-container {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 25px;
+        background: #fdfdfd;
+        border-radius: 10px;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
 
-@if (Model != null && Model.Any())
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Class Name</th>
-                <th>Course Name</th>  <!-- Changed Subject to Course Name -->
-                <th>Teacher</th>      <!-- Added Teacher column -->
-                <th>Date</th>         <!-- Changed Day to Date -->
-                <th>Time</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var schedule in Model)
-            {
+        .schedule-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .styled-table thead tr {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .styled-table th, .styled-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .styled-table tbody tr:nth-child(even) {
+            background-color: #f3f3f3;
+        }
+
+        .styled-table tbody tr:hover {
+            background-color: #f1f9ff;
+        }
+
+    .no-schedule-message {
+        text-align: center;
+        font-style: italic;
+        color: #888;
+    }
+
+    .back-btn {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 10px 20px;
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+        .back-btn:hover {
+            background-color: #5a6268;
+        }
+</style>
+
+<div class="schedule-container">
+    <h2>📅 Class Schedule</h2>
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="styled-table">
+            <thead>
                 <tr>
-                    <td>@schedule.ClassName</td>
-                    <td>@schedule.CourseName</td> <!-- Changed Subject to CourseName -->
-                    <td>@schedule.Teacher</td>    <!-- Added Teacher -->
-                    <td>@schedule.Date.ToString("yyyy-MM-dd")</td>  <!-- Changed Day to Date -->
-                    <td>@schedule.Time</td>
+                    <th>Class Name</th>
+                    <th>Course Name</th>
+                    <th>Teacher</th>
+                    <th>Date</th>
+                    <th>Time</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>No schedules available for your classes.</p>
-}
+            </thead>
+            <tbody>
+                @foreach (var schedule in Model)
+                {
+                    <tr>
+                        <td>@schedule.ClassName</td>
+                        <td>@schedule.CourseName</td>
+                        <td>@schedule.Teacher</td>
+                        <td>@schedule.Date.ToString("yyyy-MM-dd")</td>
+                        <td>@schedule.Time</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="no-schedule-message">No schedules available for your classes.</p>
+    }
+
+    <!-- Nút quay về trang chủ -->
+    <div style="text-align: center;">
+        <a href="/Teacher/TeacherHome" class="back-btn">← Back to Home Page</a>
+    </div>
+</div>

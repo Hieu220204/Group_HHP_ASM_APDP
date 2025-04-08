@@ -8,7 +8,8 @@ namespace ASM_APDP.Controllers.AdminManage
         // Hiển thị form tạo tài khoản giáo viên
         public IActionResult Create()
         {
-            return View("CreateAccountTeacher");
+            // Update to use the correct view location
+            return View("~/Views/Admin/CreateAccountTeacher.cshtml");  // Full path to the view
         }
 
         // Xử lý tạo tài khoản giáo viên
@@ -18,12 +19,12 @@ namespace ASM_APDP.Controllers.AdminManage
             if (Teacher.IsEmailExist(email))
             {
                 ViewBag.ErrorMessage = "❌ Email already exists. Please choose a different email.";
-                return View("CreateAccountTeacher");
+                return View("~/Views/Admin/CreateAccountTeacher.cshtml");  // Full path to the view
             }
 
             Teacher.SaveTeacher(fullName, email, password);
             ViewBag.SuccessMessage = "✅ New account created successfully!";
-            return View("CreateAccountTeacher");
+            return View("~/Views/Admin/CreateAccountTeacher.cshtml");  // Full path to the view
         }
     }
 }

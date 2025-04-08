@@ -1,5 +1,6 @@
 ﻿FullName,Email,Subject,Score,Notes
-teacher1,teacher1@gmail.com,English,8,123
-teacher1,teacher1@gmail.com,Progaming,7,abc
-hoang,hoang1@gmail.com,English,6,adc
-nguyen nhu phuc,phuc123@gmail.com,English,5,adc
+Nguyen Van An,an.nguyen@student.edu.vn,Computer Science Basics,88,Good understanding of basics
+Tran Thi Bich,bich.tran@student.edu.vn,Web Development,92,Excellent performance in projects
+Le Van Cuong,cuong.le@student.edu.vn,Software Engineering,85,Solid grasp of design patterns
+Pham Minh Duc,duc.pham@student.edu.vn,Data Science,90,Great at handling datasets
+Hoang Thi Em,em.hoang@student.edu.vn,Artificial Intelligence,95,Outstanding AI project work

@@ -8,6 +8,22 @@ namespace ASM_APDP.Services
 {
     public class CourseService
     {
+        //private static CourseService _instance;
+
+        //// Prevent instance creation from outside the class
+        //private CourseService() { }
+
+        //public CourseService getInstance()
+        //{
+        //    // If there is no instance, create a new one.
+        //    if (_instance == null)
+        //    {
+        //        _instance = new CourseService();
+        //    }
+        //    // Returns instance (if already exists, reuse)
+        //    return _instance;
+        //}
+
         private readonly string _filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Data", "Course.csv");
 
         // Example method to get all courses

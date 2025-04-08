@@ -5,76 +5,180 @@
     var selectedSchedule = ViewBag.SelectedSchedule as ASM_APDP.Models.Schedule;
 }
 
-<h2>Manage Schedule</h2>
-
-<!-- Form thêm hoặc chỉnh sửa lịch học -->
-<form method="post" action="@Url.Action(selectedSchedule != null ? "Edit" : "Add", "Schedule")">
-    @if (selectedSchedule != null)
-    {
-        <input type="hidden" name="ClassName" value="@selectedSchedule.ClassName" />
+<style>
+    .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        font-family: 'Segoe UI', sans-serif;
     }
 
-    <label>Course Name:</label>
-    <input type="text" name="CourseName" value="@selectedSchedule?.CourseName" required />
+    h2, h3 {
+        text-align: center;
+        color: #333;
+    }
 
-    <label>Class Name:</label>
-    <input type="text" name="ClassName" value="@selectedSchedule?.ClassName" @(selectedSchedule != null ? "readonly" : "") required />
+    form label {
+        display: block;
+        margin-top: 15px;
+        font-weight: 600;
+        color: #444;
+    }
 
-    <label>Teacher Name:</label>
-    <input type="text" name="Teacher" value="@selectedSchedule?.Teacher" required />
+    form input[type="text"],
+    form input[type="date"],
+    form input[type="time"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
 
-    <label>Date:</label>
-    <input type="date" name="Date" value="@selectedSchedule?.Date.ToString("yyyy-MM-dd")" required />
+    form button[type="submit"] {
+        margin-top: 20px;
+        background-color: #007bff;
+        color: white;
+        padding: 10px 18px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+    }
 
-    <label>Time:</label>
-    <input type="time" name="Time" value="@selectedSchedule?.Time" required />
-
-    <label>Status:</label>
-    <input type="text" name="Status" value="@selectedSchedule?.Status" required />
-
-    <button type="submit">@((selectedSchedule != null) ? "Update Schedule" : "Add Schedule")</button>
-</form>
-
-
-<hr />
-
-<h3>Schedule List</h3>
-<table border="1" cellpadding="5">
-    <thead>
-        <tr>
-            <th>Course Name</th>
-            <th>Class Name</th>
-            <th>Teacher</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var schedule in Model)
-        {
-            <tr>
-                <td>@schedule.CourseName</td>
-                <td>@schedule.ClassName</td>
-                <td>@schedule.Teacher</td>
-                <td>@schedule.Date.ToString("yyyy-MM-dd")</td>
-                <td>@schedule.Time</td>
-                <td>@schedule.Status</td>
-                <td>
-                    <a href="@Url.Action("Edit", "Schedule", new { className = schedule.ClassName })">Edit</a> |
-                    <form method="post" action="@Url.Action("Delete", "Schedule", new { className = schedule.ClassName })" style="display:inline;">
-                        <button type="submit" onclick="return confirm('Delete this schedule?')">Delete</button>
-                    </form>
-                </td>
-            </tr>
+        form button[type="submit"]:hover {
+            background-color: #0056b3;
         }
-    </tbody>
-</table>
 
-<!-- Button to go back to AdminHome -->
-<p>
-    <a href="@Url.Action("AdminHome", "Admin")">
-        <button type="button">← Back to Admin Home</button>
-    </a>
-</p>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 30px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: 500;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    form.inline-form {
+        display: inline;
+    }
+
+    .back-button {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+    }
+
+        .back-button button {
+            background-color: #6c757d;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+            .back-button button:hover {
+                background-color: #5a6268;
+            }
+</style>
+
+<div class="container">
+    <h2>Manage Schedule</h2>
+
+    <!-- Form thêm hoặc chỉnh sửa lịch học -->
+    <form method="post" action="@Url.Action(selectedSchedule != null ? "Edit" : "Add", "Schedule")">
+        @if (selectedSchedule != null)
+        {
+            <input type="hidden" name="ClassName" value="@selectedSchedule.ClassName" />
+        }
+
+        <label>Course Name:</label>
+        <input type="text" name="CourseName" value="@selectedSchedule?.CourseName" required />
+
+        <label>Class Name:</label>
+        <input type="text" name="ClassName" value="@selectedSchedule?.ClassName" @(selectedSchedule != null ? "readonly" : "") required />
+
+        <label>Teacher Name:</label>
+        <input type="text" name="Teacher" value="@selectedSchedule?.Teacher" required />
+
+        <label>Date:</label>
+        <input type="date" name="Date" value="@selectedSchedule?.Date.ToString("yyyy-MM-dd")" required />
+
+        <label>Time:</label>
+        <input type="time" name="Time" value="@selectedSchedule?.Time" required />
+
+        <label>Status:</label>
+        <input type="text" name="Status" value="@selectedSchedule?.Status" required />
+
+        <button type="submit">@((selectedSchedule != null) ? "Update Schedule" : "Add Schedule")</button>
+    </form>
+
+    <hr />
+
+    <h3>Schedule List</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Course Name</th>
+                <th>Class Name</th>
+                <th>Teacher</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var schedule in Model)
+            {
+                <tr>
+                    <td>@schedule.CourseName</td>
+                    <td>@schedule.ClassName</td>
+                    <td>@schedule.Teacher</td>
+                    <td>@schedule.Date.ToString("yyyy-MM-dd")</td>
+                    <td>@schedule.Time</td>
+                    <td>@schedule.Status</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Schedule", new { className = schedule.ClassName })">Edit</a> |
+                        <form class="inline-form" method="post" action="@Url.Action("Delete", "Schedule", new { className = schedule.ClassName })">
+                            <button type="submit" onclick="return confirm('Delete this schedule?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="back-button">
+        <a href="@Url.Action("AdminHome", "Admin")">
+            <button type="button">← Back to Admin Home</button>
+        </a>
+    </div>
+</div>

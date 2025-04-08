@@ -22,7 +22,23 @@ public class AdminController : Controller
         return View();
     }
 
+    [HttpPost]
+    public IActionResult CreateTeacherAccount(string fullName, string email, string password)
+    {
+        // Check if email already exists
+        if (Teacher.IsEmailExist(email))
+        {
+            // If email exists, display error message
+            ViewBag.ErrorMessage = "❌ Email already exists. Please choose a different email.";
+            return View("CreateAccountTeacher");
+        }
 
+        // If email does not exist, save the teacher account
+        Teacher.SaveTeacher(fullName, email, password);
 
-    
+        // Display success message
+        ViewBag.SuccessMessage = "✅ New account created successfully!";
+        return View("CreateAccountTeacher");
+    }
+
 }

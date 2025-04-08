@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ASM_APDP.Models; 
+using ASM_APDP.Models;
+using ASM_APDP.Controllers.StudentManage;
 
 public class LoginController : Controller
 {
@@ -16,7 +17,7 @@ public class LoginController : Controller
             return RedirectToAction("AdminHome", "Admin"); 
         }
 
-        var student = Student.GetStudentByEmail(email, password);
+        var student = StudentManagement.GetStudentByEmail(email, password);
         if (student != null)
         {
             return RedirectToAction("StudentHome", "Student");

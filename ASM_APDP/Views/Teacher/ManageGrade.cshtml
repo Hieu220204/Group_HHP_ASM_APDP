@@ -4,56 +4,137 @@
     ViewData["Title"] = "Manage Grade";
 }
 
-<h2>Manage Grade</h2>
-<!-- Form Thêm Điểm -->
-<h3>Add Grade</h3>
-<form method="post" action="@Url.Action("AddGrade", "Grade")">
-    <div>
-        <label>Full Name</label>
-        <input type="text" name="FullName" required />
-    </div>
-    <div>
-        <label>Email</label>
-        <input type="email" name="Email" required />
-    </div>
-    <div>
-        <label>Subject</label>
-        <input type="text" name="Subject" required />
-    </div>
-    <div>
-        <label>Score</label>
-        <input type="number" name="Score" step="0.1" required />
-    </div>
-    <div>
-        <label>Notes</label>
-        <input type="text" name="Notes" />
-    </div>
-    <button type="submit">Add Grade</button>
-</form>
+<style>
+    .container {
+        max-width: 900px;
+        margin: 30px auto;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
 
+    h2, h3 {
+        text-align: center;
+        color: #343a40;
+        margin-bottom: 20px;
+    }
 
-<!-- Bảng điểm -->
-<table class="table">
-    <thead>
-        <tr>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>Subject</th>
-            <th>Score</th>
-            <th>Notes</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var grade in Model)
-        {
-            <tr>
-                <td>@grade.FullName</td>
-                <td>@grade.Email</td>
-                <td>@grade.Subject</td>
-                <td>@grade.Score</td>
-                <td>@grade.Notes</td>
-            </tr>
+    form div {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #495057;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"] {
+        width: 100%;
+        padding: 8px 10px;
+        border: 1px solid #ced4da;
+        border-radius: 6px;
+        background-color: #ffffff;
+    }
+
+    button[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
         }
-    </tbody>
-</table>
 
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 30px;
+        background-color: #fff;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+        .table th, .table td {
+            padding: 12px;
+            border: 1px solid #dee2e6;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f1f3f5;
+        }
+</style>
+
+<div class="container">
+    <h2>Manage Grade</h2>
+
+    <!-- Form Thêm Điểm -->
+    <h3>Add Grade</h3>
+    <form method="post" action="@Url.Action("AddGrade", "Grade")">
+        <div>
+            <label>Full Name</label>
+            <input type="text" name="FullName" required />
+        </div>
+        <div>
+            <label>Email</label>
+            <input type="email" name="Email" required />
+        </div>
+        <div>
+            <label>Subject</label>
+            <input type="text" name="Subject" required />
+        </div>
+        <div>
+            <label>Score</label>
+            <input type="number" name="Score" step="0.1" required />
+        </div>
+        <div>
+            <label>Notes</label>
+            <input type="text" name="Notes" />
+        </div>
+        <button type="submit">Add Grade</button>
+    </form>
+
+    <!-- Bảng điểm -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Score</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var grade in Model)
+            {
+                <tr>
+                    <td>@grade.FullName</td>
+                    <td>@grade.Email</td>
+                    <td>@grade.Subject</td>
+                    <td>@grade.Score</td>
+                    <td>@grade.Notes</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a href="/Teacher/TeacherHome" class="back-link">← Back to Home Page</a>
+</div>

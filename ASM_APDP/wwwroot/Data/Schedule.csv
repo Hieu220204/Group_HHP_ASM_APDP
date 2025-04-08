@@ -1,8 +1,6 @@
 CourseName,ClassName,Teacher,Date,Time,Status
-Data Structures and Algorithms,Class A,aaa,4/8/2025 12:00:00 AM,16:01,Active
-Software Engineering Concepts,Class B,bbb,4/11/2025 12:00:00 AM,10:00 AM,Inactive
-Web Development with ASP.NET Core,Class C,ccc,4/12/2025 12:00:00 AM,02:00 PM,Active
-Database Systems and Design,Class D,ddd,4/13/2025 12:00:00 AM,01:00 PM,Active
-Operating Systems Fundamentals,Class E,eee,4/14/2025 12:00:00 AM,09:00 AM,Inactive
-abcd,Class AA,Nguyen NhuPhuc,4/8/2025 12:00:00 AM,15:28,Active
-aa,Class F,abc,4/8/2025 12:00:00 AM,12:47,Active
+DSA101,CS101,Nguyen Van A,2025-04-07,08:00-10:00,Active
+SE102,SE102,Tran Thi B,2025-04-08,10:00-12:00,Active
+WEB103,WD103,Le Van C,2025-04-09,13:00-15:00,Inactive
+DB104,DB104,Pham Thi D,2025-04-10,09:00-11:00,Active
+OS105,OS105,Nguyen Van E,2025-04-11,14:00-16:00,Inactive

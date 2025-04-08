@@ -7,6 +7,8 @@ builder.Services.AddTransient<SubjectService>();
 builder.Services.AddTransient<ScheduleService>();
 builder.Services.AddTransient<GradeService>();
 
+
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

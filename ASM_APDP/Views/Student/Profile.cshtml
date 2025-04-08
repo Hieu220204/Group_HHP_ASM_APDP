@@ -1,39 +1,101 @@
 ﻿@model ASM_APDP.Models.Student
 
-<h2>Update Profile</h2>
-
-<form method="post" action="/Student/UpdateProfile">
-    <div class="form-group">
-        <label for="FullName">Full Name</label>
-        <input type="text" class="form-control" id="FullName" name="FullName" value="@Model.FullName" required />
-    </div>
-    <div class="form-group">
-        <label for="DateOfBirth">Date of Birth</label>
-        <input type="text" class="form-control" id="DateOfBirth" name="DateOfBirth" value="@Model.DateOfBirth" required />
-    </div>
-    <div class="form-group">
-        <label for="PhoneNumber">Phone Number</label>
-        <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" required />
-    </div>
-    <div class="form-group">
-        <label for="Hometown">Hometown</label>
-        <input type="text" class="form-control" id="Hometown" name="Hometown" value="@Model.Hometown" required />
-    </div>
-    <div class="form-group">
-        <label for="Major">Major</label>
-        <input type="text" class="form-control" id="Major" name="Major" value="@Model.Major" required />
-    </div>
-    <button type="submit" class="btn btn-primary">Update Profile</button>
-</form>
-
-<!-- Hiển thị thông báo nếu có -->
-@if (TempData["Message"] != null)
-{
-    <div class="alert alert-info">
-        @TempData["Message"]
-    </div>
+@{
+    ViewData["Title"] = "Update Profile";
 }
 
-<div>
-    <a href="@Url.Action("StudentHome", "Student")" class="btn btn-primary">Back to Home</a>
+<style>
+    .update-profile-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+        .update-profile-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #2c3e50;
+        }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+    .form-control {
+        height: 40px;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 6px;
+    }
+
+    .alert {
+        margin-top: 20px;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .back-btn {
+        display: block;
+        margin: 20px auto 0;
+        text-align: center;
+    }
+</style>
+
+<div class="update-profile-container">
+    <h2>Update Profile</h2>
+
+    <form method="post" action="/Student/Profile">
+        <div class="form-group">
+            <label for="FullName">Full Name</label>
+            <input type="text" class="form-control" id="FullName" name="FullName" value="@Model.FullName" required />
+        </div>
+
+        <div class="form-group">
+            <label for="DateOfBirth">Date of Birth</label>
+            <input type="text" class="form-control" id="DateOfBirth" name="DateOfBirth" value="@Model.DateOfBirth" required />
+        </div>
+
+        <div class="form-group">
+            <label for="PhoneNumber">Phone Number</label>
+            <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" required />
+        </div>
+
+        <div class="form-group">
+            <label for="Hometown">Hometown</label>
+            <input type="text" class="form-control" id="Hometown" name="Hometown" value="@Model.Hometown" required />
+        </div>
+
+        <div class="form-group">
+            <label for="Major">Major</label>
+            <input type="text" class="form-control" id="Major" name="Major" value="@Model.Major" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Profile</button>
+    </form>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-info">
+            @TempData["Message"]
+        </div>
+    }
+
+    <div class="back-btn">
+        <a href="@Url.Action("StudentHome", "Student")" class="btn btn-secondary">← Back to Home</a>
+    </div>
 </div>

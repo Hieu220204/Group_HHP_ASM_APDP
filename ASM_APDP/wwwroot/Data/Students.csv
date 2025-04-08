@@ -1,2 +1,6 @@
 FullName,Email,Password,DateOfBirth,PhoneNumber,Hometown,Major
-Nguyen NhuPhuc,phuc123@gmail.com,123,2025-04-08,123456789,ha nam,IT
+Nguyen Van An,an.nguyen@student.edu.vn,Pass@123,2002-05-14,0912345678,Ha Noi,Computer Science
+Tran Thi Bich,bich.tran@student.edu.vn,TranBich@321,2001-08-23,0987654321,Da Nang,Information Technology
+Le Van Cuong,cuong.le@student.edu.vn,Cuong2024!,2003-01-10,0901234567,Ho Chi Minh,Software Engineering
+Pham Minh Duc,duc.pham@student.edu.vn,MinhDuc#2023,2000-11-30,0934567890,Can Tho,Data Science
+Hoang Thi Em,em.hoang@student.edu.vn,HoangEm@456,2002-04-18,0976543210,Hai Phong,Artificial Intelligence

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ASM_APDP.Models;
 using System;
+using ASM_APDP.Controllers.StudentManage;
 
 public class RegisterController : Controller
 {
@@ -16,14 +17,14 @@ public class RegisterController : Controller
         try
         {
             // Kiểm tra email đã tồn tại chưa
-            if (Student.IsEmailExist(email))
+            if (StudentManagement.IsEmailExist(email))
             {
                 ViewBag.ErrorMessage = "This email has already been registered. Please choose a different email.";
                 return View();
             }
 
             // Lưu thông tin sinh viên vào CSV file (using SaveStudents)
-            var students = Student.GetAllStudents();  // Get all existing students first
+            var students = StudentManagement.GetAllStudents();  // Get all existing students first
             students.Add(new Student
             {
                 FullName = fullName,
@@ -36,10 +37,10 @@ public class RegisterController : Controller
             });
 
             // Save the updated list of students back to the CSV
-            Student.SaveStudents(students);
+            StudentManagement.SaveStudents(students);
 
             // Kiểm tra xem dữ liệu có được lưu thành công không
-            if (Student.IsEmailExist(email))  // Ensure the email exists after saving
+            if (StudentManagement.IsEmailExist(email))  // Ensure the email exists after saving
             {
                 TempData["SuccessMessage"] = "Registration successful! You can log in now.";
                 return RedirectToAction("Login", "Auth");

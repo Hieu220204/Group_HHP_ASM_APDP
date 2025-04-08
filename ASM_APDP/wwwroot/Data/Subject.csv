@@ -1,4 +1,6 @@
 SubjectCode,SubjectName,Description,Teacher,Status
-123,aabr,aaa,a,aa
-123,aa,aa,aa,aa
-124,ad,ASM_Data Structures and Algorithms,Nguyen NhuPhuc,Active
+SUB101,Introduction to Programming,Basic programming concepts using C#,Nguyen Van A,Active
+SUB102,Database Management Systems,Design and query relational databases,Tran Thi B,Active
+SUB103,Web Development,Building dynamic websites with ASP.NET Core,Le Van C,Inactive
+SUB104,Software Engineering,Software development lifecycle and methodologies,Pham Thi D,Active
+SUB105,Data Structures and Algorithms,Implementing and analyzing algorithms,Hoang Van E,Inactive

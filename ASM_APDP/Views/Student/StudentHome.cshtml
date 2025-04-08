@@ -2,18 +2,111 @@
     Layout = "_Layout";
 }
 
-<h2>Welcome, @User.Identity.Name!</h2>
+<style>
+    body {
+        background: #eef2f5;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-<a href="@Url.Action("Profile", "Student")" class="btn btn-primary">View Profile</a>
+    .student-home-container {
+        max-width: 700px;
+        margin: 60px auto;
+        padding: 40px 30px;
+        background-color: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        animation: fadeIn 0.5s ease-in-out;
+    }
 
+        .student-home-container h2 {
+            margin-bottom: 35px;
+            font-size: 26px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
 
-<a href="@Url.Action("ChangePasswordStudent", "Student")" class="btn btn-warning">Change Password</a>
+        .student-home-container a,
+        .student-home-container button {
+            display: block;
+            width: 80%;
+            margin: 12px auto;
+            padding: 14px;
+            font-size: 17px;
+            border: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
 
-<a href="@Url.Action("ViewSchedule", "Student")" class="btn btn-primary">View My Schedule</a>
+    .btn {
+        font-weight: 500;
+    }
 
-<a href="@Url.Action("ViewGrade", "Grade", new { studentEmail = User.Identity.Name })" class="btn btn-primary">View Grades</a>
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
 
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
 
-<form method="post" action="@Url.Action("Logout", "Auth")">
-    <button type="submit" class="btn btn-danger">Logout</button>
-</form>
+    .btn-warning {
+        background-color: #ffc107;
+        color: #212529;
+    }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+        .btn-success:hover {
+            background-color: #1e7e34;
+        }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+    }
+
+        .btn-danger:hover {
+            background-color: #bd2130;
+        }
+
+    @@keyframes fadeIn {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+</style>
+
+<div class="student-home-container">
+    <h2>🎓 Welcome, @User.Identity.Name!</h2>
+
+    <a href="@Url.Action("Profile", "Student")" class="btn btn-primary">📄 View Profile</a>
+
+    <a href="@Url.Action("ChangePasswordStudent", "Student")" class="btn btn-warning">🔐 Change Password</a>
+
+    <a href="@Url.Action("ViewSchedule", "Student")" class="btn btn-primary">📅 View My Schedule</a>
+
+    <a href="@Url.Action("ViewGrade", "Grade", new { studentEmail = User.Identity.Name })" class="btn btn-success">📊 View Grades</a>
+
+    <form method="post" action="@Url.Action("Logout", "Auth")">
+        <button type="submit" class="btn btn-danger">🚪 Logout</button>
+    </form>
+</div>

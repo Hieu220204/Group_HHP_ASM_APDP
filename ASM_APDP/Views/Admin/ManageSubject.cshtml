@@ -5,72 +5,174 @@
     var selectedSubject = ViewBag.SelectedSubject as ASM_APDP.Models.Subject;
 }
 
-<h2>Manage Subjects</h2>
-
-<!-- Form thêm hoặc chỉnh sửa môn học -->
-<form method="post" action="@Url.Action(selectedSubject != null ? "Edit" : "Add", "Subject")">
-    @if (selectedSubject != null)
-    {
-        <input type="hidden" name="SubjectCode" value="@selectedSubject.SubjectCode" />
+<style>
+    .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        font-family: 'Segoe UI', sans-serif;
     }
 
-    <label>Subject Code:</label>
-    <input type="text" name="SubjectCode" value="@selectedSubject?.SubjectCode" required />
+    h2, h3 {
+        text-align: center;
+        color: #333;
+    }
 
-    <label>Subject Name:</label>
-    <input type="text" name="SubjectName" value="@selectedSubject?.SubjectName" required />
+    form label {
+        display: block;
+        margin-top: 15px;
+        font-weight: 600;
+        color: #444;
+    }
 
-    <label>Description:</label>
-    <input type="text" name="Description" value="@selectedSubject?.Description" required />
+    form input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
 
-    <label>Teacher:</label>
-    <input type="text" name="Teacher" value="@selectedSubject?.Teacher" required />
+    form button[type="submit"] {
+        margin-top: 20px;
+        background-color: #007bff;
+        color: white;
+        padding: 10px 18px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+    }
 
-    <label>Status:</label>
-    <input type="text" name="Status" value="@selectedSubject?.Status" required />
-
-    <button type="submit">@(selectedSubject != null ? "Update Subject" : "Add Subject")</button>
-</form>
-
-<hr />
-
-<h3>Subject List</h3>
-<table border="1" cellpadding="5">
-    <thead>
-        <tr>
-            <th>Subject Code</th>
-            <th>Subject Name</th>
-            <th>Description</th>
-            <th>Teacher</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var subject in Model)
-        {
-            <tr>
-                <td>@subject.SubjectCode</td>
-                <td>@subject.SubjectName</td>
-                <td>@subject.Description</td>
-                <td>@subject.Teacher</td>
-                <td>@subject.Status</td>
-                <td>
-                    <!-- Edit Button - Open the same page with the subject data in input fields -->
-                    <a href="@Url.Action("Edit", "Subject", new { subjectCode = subject.SubjectCode })">Edit</a>  |
-                    <!-- Delete Button -->
-                    <form method="post" action="@Url.Action("Delete", "Subject", new { subjectCode = subject.SubjectCode })">
-                        <button type="submit" onclick="return confirm('Delete this subject?')">Delete</button>
-                    </form>
-                </td>
-            </tr>
+        form button[type="submit"]:hover {
+            background-color: #0056b3;
         }
-    </tbody>
-</table>
 
-<!-- Back to Admin Home Button -->
-<p>
-    <a href="@Url.Action("AdminHome", "Admin")">
-        <button type="button">← Back to Admin Home</button>
-    </a>
-</p>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 30px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: 500;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    form.inline-form {
+        display: inline;
+    }
+
+    .back-button {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+    }
+
+        .back-button button {
+            background-color: #6c757d;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+            .back-button button:hover {
+                background-color: #5a6268;
+            }
+</style>
+
+<div class="container">
+    <h2>Manage Subjects</h2>
+
+    <!-- Form thêm hoặc chỉnh sửa môn học -->
+    <form method="post" action="@Url.Action(selectedSubject != null ? "Edit" : "Add", "Subject")">
+        @if (selectedSubject != null)
+        {
+            <input type="hidden" name="SubjectCode" value="@selectedSubject.SubjectCode" />
+        }
+
+        <label>Subject Code:</label>
+        <input type="text" name="SubjectCode" value="@selectedSubject?.SubjectCode" required />
+
+        <label>Subject Name:</label>
+        <input type="text" name="SubjectName" value="@selectedSubject?.SubjectName" required />
+
+        <label>Description:</label>
+        <input type="text" name="Description" value="@selectedSubject?.Description" required />
+
+        <label>Teacher:</label>
+        <input type="text" name="Teacher" value="@selectedSubject?.Teacher" required />
+
+        <label>Status:</label>
+        <input type="text" name="Status" value="@selectedSubject?.Status" required />
+
+        <button type="submit">@(selectedSubject != null ? "Update Subject" : "Add Subject")</button>
+    </form>
+
+    <hr />
+
+    <h3>Subject List</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Subject Code</th>
+                <th>Subject Name</th>
+                <th>Description</th>
+                <th>Teacher</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var subject in Model)
+            {
+                <tr>
+                    <td>@subject.SubjectCode</td>
+                    <td>@subject.SubjectName</td>
+                    <td>@subject.Description</td>
+                    <td>@subject.Teacher</td>
+                    <td>@subject.Status</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Subject", new { subjectCode = subject.SubjectCode })">Edit</a> |
+                        <form class="inline-form" method="post" action="@Url.Action("Delete", "Subject", new { subjectCode = subject.SubjectCode })">
+                            <button type="submit" onclick="return confirm('Delete this subject?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Back to Admin Home Button -->
+    <div class="back-button">
+        <a href="@Url.Action("AdminHome", "Admin")">
+            <button type="button">← Back to Admin Home</button>
+        </a>
+    </div>
+</div>

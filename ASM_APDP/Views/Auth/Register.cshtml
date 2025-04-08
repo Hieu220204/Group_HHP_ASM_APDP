@@ -1,37 +1,120 @@
-﻿<form method="post" asp-action="Register" asp-controller="Auth">
+﻿@{
+    Layout = "_Layout";
+}
+
+<h2 style="text-align:center;">Register</h2>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f8fb;
+        padding: 30px;
+    }
+
+    form {
+        max-width: 500px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-sizing: border-box;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+        margin-right: 10px;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        text-decoration: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+    @@media (max-width: 576px) {
+        form {
+            padding: 20px;
+        }
+
+        .btn {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+</style>
+
+<form method="post" asp-action="Register" asp-controller="Auth">
     <div class="form-group">
         <label for="fullName">Full Name:</label>
-        <input type="text" class="form-control" id="fullName" name="fullName" required />
+        <input type="text" id="fullName" name="fullName" required />
     </div>
 
     <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" name="email" required />
+        <input type="email" id="email" name="email" required />
     </div>
 
     <div class="form-group">
         <label for="password">Password:</label>
-        <input type="password" class="form-control" id="password" name="password" required />
+        <input type="password" id="password" name="password" required />
     </div>
 
     <div class="form-group">
         <label for="dob">Date of Birth:</label>
-        <input type="date" class="form-control" id="dob" name="dob" required />
+        <input type="date" id="dob" name="dob" required />
     </div>
 
     <div class="form-group">
         <label for="phoneNumber">Phone Number:</label>
-        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required />
+        <input type="text" id="phoneNumber" name="phoneNumber" required />
     </div>
 
     <div class="form-group">
         <label for="hometown">Hometown:</label>
-        <input type="text" class="form-control" id="hometown" name="hometown" required />
+        <input type="text" id="hometown" name="hometown" required />
     </div>
 
     <div class="form-group">
         <label for="major">Major:</label>
-        <input type="text" class="form-control" id="major" name="major" required />
+        <input type="text" id="major" name="major" required />
     </div>
 
     <button type="submit" class="btn btn-primary">Register</button>
