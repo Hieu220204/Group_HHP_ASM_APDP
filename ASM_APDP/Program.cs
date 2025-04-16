@@ -2,7 +2,12 @@
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<CourseService>();
+builder.Services.AddScoped<CourseService>(provider =>
+{
+    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "Course.csv");
+    return new CourseService(filePath);
+});
+
 builder.Services.AddTransient<SubjectService>();
 builder.Services.AddTransient<ScheduleService>();
 builder.Services.AddTransient<GradeService>();
@@ -22,8 +27,6 @@ builder.Services.AddSession(options =>
 });
 
 var app = builder.Build();
-
-
 
 // Use session middleware
 app.UseSession();
@@ -45,5 +48,6 @@ app.MapControllerRoute(
     name: "manageGrade",
     pattern: "Teacher/ManageGrade", // URL cho trang ManageGrade
     defaults: new { controller = "Teacher", action = "ManageGrade" });
+
 
 app.Run();

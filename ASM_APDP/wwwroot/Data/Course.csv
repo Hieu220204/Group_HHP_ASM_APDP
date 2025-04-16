@@ -1,7 +1,3 @@
 Id,Name,Description,TeacherName,Duration,Status
-1,DSA101,ASM_Data Structures and Algorithms,Nguyen Van A,3 hours,Active
-2,SE102,Software Engineering Concepts,Tran Thi B,3 hours,Active
-3,WEB103,Web Development with ASP.NET Core,Le Van C,4 hours,Inactive
-4,DB104,Database Systems and Design,Pham Thi D,2 hours,Active
-5,OS105,Operating Systems Fundamentals,Nguyen Van E,5 hours,Inactive
-6,DS106,Data Science with Python,Hoang Thi F,4 hours,Active
+1,DSA101,Data Structures,John Doe,40 hours,Active
+2,WEB202,Web Programming,Jane Smith,30 hours,Inactive

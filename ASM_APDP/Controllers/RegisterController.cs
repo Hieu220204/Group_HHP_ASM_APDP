@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ASM_APDP.Controllers.StudentManage;
 using ASM_APDP.Models;
-using System;
-using ASM_APDP.Controllers.StudentManage;
+using Microsoft.AspNetCore.Mvc;
 
 public class RegisterController : Controller
 {
@@ -20,11 +19,11 @@ public class RegisterController : Controller
             if (StudentManagement.IsEmailExist(email))
             {
                 ViewBag.ErrorMessage = "This email has already been registered. Please choose a different email.";
-                return View();
+                return View("Register");  // Trả về view Register khi email trùng
             }
 
             // Lưu thông tin sinh viên vào CSV file (using SaveStudents)
-            var students = StudentManagement.GetAllStudents();  // Get all existing students first
+            var students = StudentManagement.GetAllStudents();  // Lấy danh sách sinh viên hiện có
             students.Add(new Student
             {
                 FullName = fullName,
@@ -36,11 +35,11 @@ public class RegisterController : Controller
                 Major = major
             });
 
-            // Save the updated list of students back to the CSV
+            // Lưu lại danh sách sinh viên vào CSV
             StudentManagement.SaveStudents(students);
 
             // Kiểm tra xem dữ liệu có được lưu thành công không
-            if (StudentManagement.IsEmailExist(email))  // Ensure the email exists after saving
+            if (StudentManagement.IsEmailExist(email))  // Đảm bảo email đã được lưu
             {
                 TempData["SuccessMessage"] = "Registration successful! You can log in now.";
                 return RedirectToAction("Login", "Auth");
@@ -48,15 +47,13 @@ public class RegisterController : Controller
             else
             {
                 ViewBag.ErrorMessage = "An error occurred, the account could not be saved!";
-                return View();
+                return View("Register");  // Trả về view Register khi có lỗi
             }
         }
         catch (Exception ex)
         {
             ViewBag.ErrorMessage = "An error occurred while registering the account: " + ex.Message;
-            return View();
+            return View("Register");  // Trả về view Register nếu có ngoại lệ
         }
     }
-
-
 }

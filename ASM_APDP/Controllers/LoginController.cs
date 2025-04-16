@@ -4,6 +4,13 @@ using ASM_APDP.Controllers.StudentManage;
 
 public class LoginController : Controller
 {
+    private IAuthenticationService @object;
+
+    public LoginController(IAuthenticationService @object)
+    {
+        this.@object = @object;
+    }
+
     public IActionResult Login()
     {
         return View();

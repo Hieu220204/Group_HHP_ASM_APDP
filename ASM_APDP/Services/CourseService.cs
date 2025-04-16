@@ -24,7 +24,12 @@ namespace ASM_APDP.Services
         //    return _instance;
         //}
 
-        private readonly string _filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Data", "Course.csv");
+        private string _filePath;
+
+        public CourseService(string filePath)
+        {
+            _filePath = filePath;
+        }
 
         // Example method to get all courses
         public List<Course> GetAllCourses()

@@ -33,10 +33,10 @@ namespace ASM_APDP.Controllers.AdminManage
         // Load thông tin để sửa (GET request)
         public IActionResult Edit(int id)
         {
-            var course = _courseService.GetCourseById(id); // Get course by ID using the service
-            ViewBag.SelectedCourse = course; // Pass selected course to the view
-            var courses = _courseService.GetAllCourses(); // Get all courses for display
-            return View("~/Views/Admin/ManageCourse.cshtml", courses); // Return to the ManageCourse view
+            var course = _courseService.GetCourseById(id);
+            ViewData["SelectedCourse"] = course; // ✅ Dùng ViewData thay vì ViewBag
+            var courses = _courseService.GetAllCourses();
+            return View("~/Views/Admin/ManageCourse.cshtml", courses);
         }
 
         // Cập nhật khoá học sau khi chỉnh sửa (POST request)

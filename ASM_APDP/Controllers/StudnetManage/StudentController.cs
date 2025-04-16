@@ -11,7 +11,6 @@ public class StudentController : Controller
         return View();
     }
 
-
     // Trang xem thông tin cá nhân
     public IActionResult Profile()
     {
